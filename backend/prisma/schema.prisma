@@ -13,3 +13,36 @@ datasource db {
   provider = "postgresql"
   url      = env("DB_URI")
 }
+
+
+/////////// User table ///////////
+model User {
+    id        Int   @id @default(autoincrement())
+    email     String   @unique
+    username      String 
+    password  String
+    user_role  UserRole @default(USER)
+    isActivated Boolean @default(false)
+    activationLink String?
+    tokens Token?
+    createdAt DateTime? @default(now())
+    updatedAt DateTime? @updatedAt
+
+}
+
+enum UserRole {
+    USER
+    ADMIN
+
+}
+/////////// User table ///////////
+
+
+/////////// Token table ///////////
+model Token{
+    id Int @id @default(autoincrement())
+    refreshToken String 
+    userId Int  @unique
+    user User @relation(fields: [userId], references: [id])
+}
+/////////// Token table ///////////

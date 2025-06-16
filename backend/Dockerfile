@@ -1,5 +1,7 @@
 
-FROM node:18-slim
+FROM node:lts
+
+RUN apt-get update && apt-get install -y openssl
 
 WORKDIR /app
 
@@ -11,4 +13,4 @@ COPY . .
 
 EXPOSE 8080
 
-CMD ["npm", "dev"]
+CMD ["npm", "run", "dev"]
