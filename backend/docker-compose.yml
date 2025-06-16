@@ -1,0 +1,56 @@
+version: "3"
+services:
+  backend:
+    build: .
+    image: backend
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+    networks:
+      - comp-service
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+      - type: tmpfs
+        target: /app/logs
+
+  database:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydatabase
+    volumes:
+      - postgre-data:/var/lib/postgresql/data
+    networks:
+      - comp-service
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=our_project@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=1234
+    ports:
+      - "5050:80"
+    networks:
+      - comp-service
+    depends_on:
+      - database
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+
+networks:
+  comp-service:
+    driver: bridge
+
+volumes:
+  postgre-data:
+    driver: local
+  pgadmin-data:
+    driver: local
