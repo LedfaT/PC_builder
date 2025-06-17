@@ -2,19 +2,26 @@ import { Router } from "express";
 // import authController from "@controllers/authController";
 import { body } from "express-validator";
 import authMiddleware from "@middlewares/authMiddleware";
+import { AuthController } from "@controllers/authController";
+import { container } from "@config/container";
+import { userDedpendencyTypes } from "@ownTypes/dependencyTypes";
 
-const router = Router();
+const authRouter = Router();
 
-// router.post(
-//   "/registration",
-//   body("email").isEmail(),
-//   body("password").isLength({ min: 3, max: 32 }),
-//   authController.registration
-// );
-// router.post("/login", authController.login);
-// router.post("/logout", authController.logout);
-// router.get("/activate/:link", authController.activate);
-// router.get("/refresh", authController.refresh);
-// router.get("/users", authMiddleware, authController.getUsers);
+const authController = container.get<AuthController>(
+  userDedpendencyTypes.AuthController
+);
 
-export default router;
+authRouter.post(
+  "/registration",
+  body("email").isEmail(),
+  body("password").isLength({ min: 3, max: 32 }),
+  authController.registration
+);
+// authRouter.post("/login", authController.login);
+// authRouter.post("/logout", authController.logout);
+// authRouter.get("/activate/:link", authController.activate);
+// authRouter.get("/refresh", authController.refresh);
+// authRouter.get("/users", authMiddleware, authController.getUsers);
+
+export default authRouter;

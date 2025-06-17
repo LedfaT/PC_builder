@@ -12,3 +12,5 @@ container.bind(userDedpendencyTypes.AuthService).to(AuthService);
 container.bind(userDedpendencyTypes.AuthController).to(AuthController);
 container.bind(userDedpendencyTypes.MailService).to(MailService);
 container.bind(userDedpendencyTypes.TokenService).to(TokenService);
+
+export { container };

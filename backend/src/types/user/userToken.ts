@@ -1,8 +1,7 @@
 export type UserToken = {
-  id: string;
+  id: number;
   email: string;
   isActivated: boolean;
-  activationLink: string;
-  role: string;
+  user_role: string;
   createdAt: Date;
 };

@@ -14,7 +14,7 @@
     "skipLibCheck": true,
     "paths": {
       "@services/*": ["./src/services/*"],
-      "@routes/*": ["./src/routes/*"],
+      "@router/*": ["./src/router/*"],
       "@controllers/*": ["./src/controllers/*"],
       "@middlewares/*": ["./src/middlewares/*"],
       "@config/*": ["./src/config/*"],

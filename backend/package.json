@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --legacy-watch --watch src --ext ts --exec ts-node src/index.ts"
+    "dev": "nodemon --legacy-watch --watch src --ext ts --exec  ts-node -r tsconfig-paths/register src/index.ts"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +26,7 @@
     "pg": "^8.14.1",
     "pg-hstore": "^2.3.4",
     "reflect-metadata": "^0.2.2",
+    "tsconfig-paths": "^4.2.0",
     "uuid": "^11.1.0"
   },
   "devDependencies": {
