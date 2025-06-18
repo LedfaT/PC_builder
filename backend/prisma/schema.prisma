@@ -152,3 +152,20 @@ enum TypeSize {
     MiniITX
   }
 //////////// Motherboard table ///////////
+
+//////////// PowerSupply table ///////////
+model PowerSupply {
+  id          Int     @id @default(autoincrement())
+  title       String
+  description String? @db.Text
+  image       String? @db.Text
+  strength    Int
+  sertificate String?
+  cost        Float?
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @updatedAt
+
+  @@map("power_supply")
+}
+//////////// PowerSupply table ///////////
+
