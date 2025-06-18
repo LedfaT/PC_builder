@@ -3,6 +3,7 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import authRouter from "./router/authRouter";
+import errorMiddleware from "@middlewares/errorMiddleware";
 
 const app = express();
 app.use(
@@ -15,6 +16,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api", authRouter);
+app.use(errorMiddleware);
 
 const port = process.env.PORT ? Number(process.env.PORT) : 8080;
 
