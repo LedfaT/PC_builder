@@ -26,6 +26,8 @@ model User {
     tokens Token?
     createdAt DateTime? @default(now())
     updatedAt DateTime? @updatedAt
+
+    @@map("user")
 }
 
 enum UserRole {
@@ -42,5 +44,45 @@ model Token{
     refreshToken String 
     userId Int  @unique
     user User @relation(fields: [userId], references: [id])
+
+    @@map("token")
 }
 /////////// Token table ///////////
+
+//////////// CPU table ///////////
+model CPU {
+    id Int @id @default(autoincrement())
+    title String
+    cost Float
+    description String? @db.Text
+    image String? @db.Text
+    cores String
+    threads String
+    Architecture String
+    cache String
+    clock String
+    createdAt DateTime? @default(now())
+    updatedAt DateTime? @updatedAt
+
+    @@map("cpu")
+}
+//////////// CPU table ///////////
+
+//////////// GPU table ///////////
+model GPU {
+  id            Int     @id @default(autoincrement())
+  title         String
+  description   String? @db.Text
+  cores         String
+  image         String? @db.Text
+  threads       String
+  vram_quantity String
+  cache         String
+  clock         String
+  vram_type     String
+  cost          Float?
+
+  @@map("gpu")
+}
+//////////// GPU table ///////////
+
