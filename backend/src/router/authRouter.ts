@@ -18,9 +18,9 @@ authRouter.post(
   body("password").isLength({ min: 3, max: 32 }),
   authController.registration
 );
-// authRouter.post("/login", authController.login);
-// authRouter.post("/logout", authController.logout);
-// authRouter.get("/activate/:link", authController.activate);
+authRouter.post("/login", authController.login);
+authRouter.post("/logout", authController.logout);
+authRouter.get("/activate/:link", authController.activate);
 // authRouter.get("/refresh", authController.refresh);
 // authRouter.get("/users", authMiddleware, authController.getUsers);
 

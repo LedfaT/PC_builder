@@ -66,4 +66,35 @@ export class AuthService {
 
     return this._generateUserPayload(newUser);
   };
+
+  login = async ({ email, password }: UserCreateIn) => {
+    const user = await client.user.findUnique({ where: { email } });
+    if (!user) {
+      throw ApiError.BadRequest(`User with email ${email} not found`);
+    }
+
+    const isPassEquals = await bcrypt.compare(password, user.password);
+    if (!isPassEquals) {
+      throw ApiError.BadRequest("Incorrect password");
+    }
+
+    return this._generateUserPayload(user);
+  };
+
+  async logout(refreshToken: string) {
+    const token = await this.tokenService.removeToken(refreshToken);
+    return token;
+  }
+
+  async activate(activationLink: string) {
+    const user = await client.user.findFirst({ where: { activationLink } });
+    if (!user) {
+      throw ApiError.BadRequest(`Incorrect activation link`);
+    }
+
+    await client.user.update({
+      where: { id: user.id },
+      data: { isActivated: true },
+    });
+  }
 }
