@@ -86,3 +86,69 @@ model GPU {
 }
 //////////// GPU table ///////////
 
+//////////// HDD table ///////////
+model HDD {
+  id              Int     @id @default(autoincrement())
+  title           String
+  description     String? @db.Text
+  image           String? @db.Text
+  memory_quantity String
+  reading_speed   String
+  write_speed     String
+  cost            Float?
+
+  @@map("hdd")
+}
+//////////// HDD table ///////////
+
+//////////// RAM table ///////////
+model RAM {
+  id              Int     @id @default(autoincrement())
+  title           String
+  description     String? @db.Text
+  image           String? @db.Text
+  memory_quantity String?
+  memory_type     MemoryType
+  radiator_type   RadiatorType
+  cost            Float?
+
+  @@map("ram")
+}
+
+enum MemoryType {
+  None
+  DDR3
+  DDR4
+  DDR5
+}
+
+enum RadiatorType {
+  None
+  Aluminium
+  Fan
+  Water
+}
+//////////// RAM table ///////////
+
+//////////// Motherboard table ///////////
+model Motherboard {
+  id          Int     @id @default(autoincrement())
+  title       String
+  description String? @db.Text
+  image       String? @db.Text
+  chipset     String
+  type_size   Int
+  socket      String
+  cost        Float?
+
+
+  @@map("motherboard")
+}
+
+enum TypeSize {
+    None
+    ATX
+    MicroATX
+    MiniITX
+  }
+//////////// Motherboard table ///////////
