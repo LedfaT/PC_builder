@@ -196,3 +196,16 @@ enum TypeSizeTower {
   Mini_Tower
 }
 //////////// Tower table ///////////
+
+//////////// Wifi Module table ///////////
+model WifiModule {
+  id          Int       @id @default(autoincrement())
+  title       String
+  description String?   
+  image       String?   
+  generation  String
+  cost        Float?
+
+  @@map("wifi_module") 
+}
+//////////// Wifi Module table ///////////
