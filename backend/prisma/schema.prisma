@@ -209,3 +209,25 @@ model WifiModule {
   @@map("wifi_module") 
 }
 //////////// Wifi Module table ///////////
+
+//////////// SSD table ///////////
+model SSD {
+  id              Int       @id @default(autoincrement())
+  title           String
+  description     String?   
+  image           String?   
+  memory_quantity String
+  radiator_type   RadiatorTypeSSD   
+  reading_speed   String
+  write_speed     String
+  cost            Float?
+
+  @@map("ssd") 
+}
+
+enum RadiatorTypeSSD {
+  None
+  Aluminium
+  Fan
+}
+//////////// SSD table ///////////
