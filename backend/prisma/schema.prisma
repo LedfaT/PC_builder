@@ -244,3 +244,23 @@ model BluetoothModule {
   @@map("bluetooth_module")
 } 
 //////////// Bluetooth module table ///////////
+
+//////////// Cooling system table ///////////
+model CoolingSystem {
+  id           Int       @id @default(autoincrement())
+  title        String
+  image        String?   
+  description  String?   
+  type_size    TypeSizeCoolingSystem        
+  heat_removal String
+  cost         Float?
+
+  @@map("cooling_system")
+}
+
+enum TypeSizeCoolingSystem {
+  mm280
+  mm360
+  mm240
+}
+//////////// Cooling system table ///////////
