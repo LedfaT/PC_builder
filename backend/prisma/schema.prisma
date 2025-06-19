@@ -169,3 +169,30 @@ model PowerSupply {
 }
 //////////// PowerSupply table ///////////
 
+//////////// Tower table ///////////
+model Tower {
+  id           Int       @id @default(autoincrement())
+  title        String
+  description  String?   
+  image        String?   
+  fan_included Boolean   @default(true)
+  type_size    TypeSizeTower       
+  fan_type     FanType     
+  cost         Float?
+
+  @@map("tower")
+}
+
+enum FanType {
+  mm200
+  mm120
+  mm92
+}
+
+enum TypeSizeTower {
+  None
+  Full_Tower
+  Mid_Tower
+  Mini_Tower
+}
+//////////// Tower table ///////////
