@@ -4,3 +4,8 @@ export const userDedpendencyTypes = {
   TokenService: Symbol.for("TokenService"),
   MailService: Symbol.for("MailService"),
 };
+
+export const cpuDependencyTypes = {
+  CpuService: Symbol.for("CpuService"),
+  CpuController: Symbol.for("CpuController"),
+};
