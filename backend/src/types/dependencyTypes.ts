@@ -14,3 +14,8 @@ export const gpuDependencyTypes = {
   GpuService: Symbol.for("GpuService"),
   GpuController: Symbol.for("GpuController"),
 };
+
+export const ssdDependencyTypes = {
+  SsdService: Symbol.for("SsdService"),
+  SsdController: Symbol.for("SsdController"),
+};

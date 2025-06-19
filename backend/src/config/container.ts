@@ -4,6 +4,7 @@ import {
   userDedpendencyTypes,
   cpuDependencyTypes,
   gpuDependencyTypes,
+  ssdDependencyTypes,
 } from "@ownTypes/dependencyTypes";
 import { AuthService } from "@services/authService";
 import { AuthController } from "@controllers/authController";
@@ -13,6 +14,8 @@ import { CpuService } from "@services/cpuService";
 import { CpuController } from "@controllers/cpuController";
 import { GpuService } from "@services/gpuService";
 import { GpuController } from "@controllers/gpuController";
+import { SsdService } from "@services/ssdService";
+import { SsdController } from "@controllers/ssdController";
 
 const container = new Container();
 
@@ -26,5 +29,8 @@ container.bind(cpuDependencyTypes.CpuController).to(CpuController);
 
 container.bind(gpuDependencyTypes.GpuService).to(GpuService);
 container.bind(gpuDependencyTypes.GpuController).to(GpuController);
+
+container.bind(ssdDependencyTypes.SsdService).to(SsdService);
+container.bind(ssdDependencyTypes.SsdController).to(SsdController); // Assuming SsdController is defined similarly to other controllers
 
 export { container };
