@@ -9,3 +9,8 @@ export const cpuDependencyTypes = {
   CpuService: Symbol.for("CpuService"),
   CpuController: Symbol.for("CpuController"),
 };
+
+export const gpuDependencyTypes = {
+  GpuService: Symbol.for("GpuService"),
+  GpuController: Symbol.for("GpuController"),
+};
