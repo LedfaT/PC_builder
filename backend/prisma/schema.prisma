@@ -264,3 +264,23 @@ enum TypeSizeCoolingSystem {
   mm240
 }
 //////////// Cooling system table ///////////
+
+//////////// Water cooling system table ///////////
+model WaterCoolingSystem {
+  id           Int       @id @default(autoincrement())
+  title        String
+  image        String?   
+  description  String?   
+  type_size    Int       
+  heat_removal String
+  cost         Float?
+
+  @@map("water_cooling_system")
+}
+
+enum TypeSizeWaterCoolingSystem {
+  mm280
+  mm360
+  mm240
+}
+//////////// Water cooling system table ///////////
