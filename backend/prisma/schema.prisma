@@ -231,3 +231,16 @@ enum RadiatorTypeSSD {
   Fan
 }
 //////////// SSD table ///////////
+
+//////////// Bluetooth module table ///////////
+model BluetoothModule {
+  id          Int       @id @default(autoincrement())
+  title       String
+  image       String?   
+  description String?   
+  generation  String
+  cost        Float?
+
+  @@map("bluetooth_module")
+} 
+//////////// Bluetooth module table ///////////
