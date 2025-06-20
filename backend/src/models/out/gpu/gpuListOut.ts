@@ -1,18 +1,20 @@
-module.exports = class GpuListOut {
-  id;
-  title;
-  cores;
-  cost;
-  threads;
-  vram_quantity;
-  cache;
-  clock;
-  vram_type;
-  createdAt;
-  updatedAt;
-  description;
-  image;
-  constructor(gpu) {
+import { GPU } from "@prisma/client";
+
+export default class GpuListOut {
+  id: number;
+  title: string;
+  cores: string;
+  cost: number | null;
+  threads: string;
+  vram_quantity: string;
+  cache: string;
+  clock: string;
+  vram_type: string;
+  createdAt: Date | null;
+  updatedAt: Date | null;
+  description: string | null;
+  image: string | null;
+  constructor(gpu: GPU) {
     this.id = gpu.id;
     this.cost = gpu.cost;
     this.cores = gpu.cores;
@@ -27,4 +29,4 @@ module.exports = class GpuListOut {
     this.createdAt = gpu.createdAt;
     this.updatedAt = gpu.updatedAt;
   }
-};
+}
