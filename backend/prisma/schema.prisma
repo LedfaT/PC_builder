@@ -288,7 +288,7 @@ model WaterCoolingSystem {
   title        String
   image        String?   
   description  String?   
-  type_size    Int       
+  type_size    TypeSizeWaterCoolingSystem       
   heat_removal String
   cost         Float?
   createdAt   DateTime? @default(now())

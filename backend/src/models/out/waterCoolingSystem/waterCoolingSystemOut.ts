@@ -1,14 +1,17 @@
-module.exports = class WaterCoolingSystemListOut {
-  id;
-  title;
-  cost;
-  type_size;
-  heat_removal;
-  createdAt;
-  updatedAt;
-  description;
-  image;
-  constructor(waterCoolingSystem) {
+import { TypeSizeWaterCoolingSystem, WaterCoolingSystem } from "@prisma/client";
+
+export default class WaterCoolingSystemOut {
+  id: number;
+  title: string;
+  cost: number | null;
+  type_size: TypeSizeWaterCoolingSystem;
+  heat_removal: string | null;
+  createdAt: Date | null;
+  updatedAt: Date | null;
+  description: string | null;
+  image: string | null;
+
+  constructor(waterCoolingSystem: WaterCoolingSystem) {
     this.id = waterCoolingSystem.id;
     this.cost = waterCoolingSystem.cost;
     this.title = waterCoolingSystem.title;
@@ -19,4 +22,4 @@ module.exports = class WaterCoolingSystemListOut {
     this.createdAt = waterCoolingSystem.createdAt;
     this.updatedAt = waterCoolingSystem.updatedAt;
   }
-};
+}
