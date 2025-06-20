@@ -1,17 +1,19 @@
-module.exports = class CpuListOut {
-  id;
-  title;
-  cores;
-  cost;
-  threads;
-  Architecture;
-  cache;
-  clock;
-  createdAt;
-  updatedAt;
-  description;
-  image;
-  constructor(cpu) {
+import { CPU } from "@prisma/client";
+
+export default class CpuListOut {
+  id: number;
+  title: string;
+  cores: string;
+  cost: number;
+  threads: string;
+  Architecture: string;
+  cache: string;
+  clock: string;
+  createdAt: Date | null;
+  updatedAt: Date | null;
+  description: string | null;
+  image: string | null;
+  constructor(cpu: CPU) {
     this.id = cpu.id;
     this.cost = cpu.cost;
     this.cores = cpu.cores;
@@ -25,4 +27,4 @@ module.exports = class CpuListOut {
     this.createdAt = cpu.createdAt;
     this.updatedAt = cpu.updatedAt;
   }
-};
+}
