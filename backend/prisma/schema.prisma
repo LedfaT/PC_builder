@@ -81,6 +81,8 @@ model GPU {
   clock         String
   vram_type     String
   cost          Float?
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @updatedAt
 
   @@map("gpu")
 }
@@ -96,6 +98,8 @@ model HDD {
   reading_speed   String
   write_speed     String
   cost            Float?
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @updatedAt
 
   @@map("hdd")
 }
@@ -111,7 +115,8 @@ model RAM {
   memory_type     MemoryType
   radiator_type   RadiatorType
   cost            Float?
-
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @updatedAt
   @@map("ram")
 }
 
@@ -140,6 +145,8 @@ model Motherboard {
   type_size   Int
   socket      String
   cost        Float?
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @updatedAt
 
 
   @@map("motherboard")
@@ -179,6 +186,8 @@ model Tower {
   type_size    TypeSizeTower       
   fan_type     FanType     
   cost         Float?
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @updatedAt
 
   @@map("tower")
 }
@@ -205,6 +214,8 @@ model WifiModule {
   image       String?   
   generation  String
   cost        Float?
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @updatedAt
 
   @@map("wifi_module") 
 }
@@ -221,6 +232,8 @@ model SSD {
   reading_speed   String
   write_speed     String
   cost            Float?
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @updatedAt
 
   @@map("ssd") 
 }
@@ -240,6 +253,8 @@ model BluetoothModule {
   description String?   
   generation  String
   cost        Float?
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @updatedAt
 
   @@map("bluetooth_module")
 } 
@@ -254,6 +269,8 @@ model CoolingSystem {
   type_size    TypeSizeCoolingSystem        
   heat_removal String
   cost         Float?
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @updatedAt
 
   @@map("cooling_system")
 }
@@ -274,6 +291,8 @@ model WaterCoolingSystem {
   type_size    Int       
   heat_removal String
   cost         Float?
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @updatedAt
 
   @@map("water_cooling_system")
 }

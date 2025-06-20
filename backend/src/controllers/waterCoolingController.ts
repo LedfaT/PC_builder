@@ -3,7 +3,7 @@ import { WaterCoolingService } from "@services/waterCoolingService";
 import { inject, injectable } from "inversify";
 
 @injectable()
-export class WaterCoolingcontroller {
+export class WaterCoolingController {
   waterCoolingService: WaterCoolingService;
 
   constructor(
