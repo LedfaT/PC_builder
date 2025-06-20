@@ -1,15 +1,17 @@
-module.exports = class PowerSupplyListOut {
-  id;
-  title;
-  strength;
-  cost;
-  sertificate;
-  cost;
-  createdAt;
-  updatedAt;
-  description;
-  image;
-  constructor(powerSupply) {
+import { PowerSupply } from "@prisma/client";
+
+export default class PowerSupplyOut {
+  id: number;
+  title: string;
+  strength: number;
+  cost: number | null;
+  sertificate: string | null;
+  createdAt: Date | null;
+  updatedAt: Date | null;
+  description: string | null;
+  image: string | null;
+
+  constructor(powerSupply: PowerSupply) {
     this.id = powerSupply.id;
     this.cost = powerSupply.cost;
     this.strength = powerSupply.strength;
@@ -21,4 +23,4 @@ module.exports = class PowerSupplyListOut {
     this.createdAt = powerSupply.createdAt;
     this.updatedAt = powerSupply.updatedAt;
   }
-};
+}

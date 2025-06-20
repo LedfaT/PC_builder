@@ -142,7 +142,7 @@ model Motherboard {
   description String? @db.Text
   image       String? @db.Text
   chipset     String
-  type_size   Int
+  type_size   TypeSize
   socket      String
   cost        Float?
   createdAt   DateTime? @default(now())

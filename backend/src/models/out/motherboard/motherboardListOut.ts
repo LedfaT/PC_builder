@@ -1,15 +1,18 @@
-module.exports = class motherboardListOut {
-  id;
-  title;
-  chipset;
-  cost;
-  type_size;
-  socket;
-  createdAt;
-  updatedAt;
-  description;
-  image;
-  constructor(motherboard) {
+import { Motherboard, TypeSize } from "@prisma/client";
+
+export default class motherboardListOut {
+  id: number;
+  title: string;
+  chipset: string;
+  cost: number | null;
+  type_size: TypeSize;
+  socket: string;
+  createdAt: Date | null;
+  updatedAt: Date | null;
+  description: string | null;
+  image: string | null;
+
+  constructor(motherboard: Motherboard) {
     this.id = motherboard.id;
     this.cost = motherboard.cost;
     this.chipset = motherboard.chipset;
@@ -21,4 +24,4 @@ module.exports = class motherboardListOut {
     this.createdAt = motherboard.createdAt;
     this.updatedAt = motherboard.updatedAt;
   }
-};
+}
