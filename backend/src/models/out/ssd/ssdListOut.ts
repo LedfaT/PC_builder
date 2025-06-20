@@ -1,16 +1,19 @@
-module.exports = class SsdListOut {
-  id;
-  title;
-  memory_quantity;
-  cost;
-  reading_speed;
-  radiator_type;
-  write_speed;
-  createdAt;
-  updatedAt;
-  description;
-  image;
-  constructor(ssd) {
+import { RadiatorTypeSSD, SSD } from "@prisma/client";
+
+export default class SsdListOut {
+  id: number;
+  title: string;
+  memory_quantity: string | null;
+  cost: number | null;
+  reading_speed: string;
+  radiator_type: RadiatorTypeSSD;
+  write_speed: string;
+  createdAt: Date | null;
+  updatedAt: Date | null;
+  description: string | null;
+  image: string | null;
+
+  constructor(ssd: SSD) {
     this.id = ssd.id;
     this.cost = ssd.cost;
     this.memory_quantity = ssd.memory_quantity;
@@ -23,4 +26,4 @@ module.exports = class SsdListOut {
     this.createdAt = ssd.createdAt;
     this.updatedAt = ssd.updatedAt;
   }
-};
+}
