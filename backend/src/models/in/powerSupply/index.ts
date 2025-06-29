@@ -1,4 +1,5 @@
 import { PowerSupply } from "@prisma/client";
+import { type } from "os";
 
 export default class PowerSupplyCreate {
   title: string;
@@ -18,3 +19,5 @@ export default class PowerSupplyCreate {
     this.cost = powerSupply.cost;
   }
 }
+
+export type TPowerSupplyUpdate = Partial<PowerSupplyCreate>;
