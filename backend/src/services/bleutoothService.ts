@@ -2,9 +2,11 @@ import { BluetoothModule } from "@prisma/client";
 import client from "@database/index";
 import BluetoothModuleOut from "@models/out/bluetoothModule/bluetoothModuleOut";
 import ApiError from "@exeptions/api-error";
+import BluetoothModuleCreate from "@models/in/bluetoothModule/bluetoothModuleCreate";
+import { TBluetoothModuleUpdate } from "@models/in/bluetoothModule/bluetoothModuleCreate";
 
 class BluetoothModuleService {
-  async create(bluetooth: Omit<BluetoothModule, "id">): Promise<void> {
+  async create(bluetooth: BluetoothModuleCreate): Promise<void> {
     const existing = await client.bluetoothModule.findFirst({
       where: { title: bluetooth.title },
     });
@@ -41,7 +43,7 @@ class BluetoothModuleService {
     }
 
     if (typeof cost === "number") {
-      where.cost = cost; // Или можно добавить диапазон
+      where.cost = cost;
     }
 
     const [count, rows] = await Promise.all([
@@ -63,20 +65,20 @@ class BluetoothModuleService {
   }
 
   async getBluetoothModuleById(id: number): Promise<BluetoothModuleOut> {
-    const module = await client.bluetoothModule.findUnique({
+    const bluerModule = await client.bluetoothModule.findUnique({
       where: { id },
     });
 
-    if (!module) {
+    if (!bluerModule) {
       throw ApiError.BadRequest("There are no bluetooth modules with such id");
     }
 
-    return new BluetoothModuleOut(module);
+    return new BluetoothModuleOut(bluerModule);
   }
 
   async update(
     id: number,
-    data: Omit<BluetoothModule, "id">
+    data: TBluetoothModuleUpdate
   ): Promise<BluetoothModule> {
     const existing = await client.bluetoothModule.findUnique({ where: { id } });
     if (!existing) {

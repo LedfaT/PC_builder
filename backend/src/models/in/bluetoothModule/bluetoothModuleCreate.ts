@@ -14,3 +14,5 @@ export default class BluetoothModuleCreate {
     this.title = bluetooth.title;
   }
 }
+
+export type TBluetoothModuleUpdate = Partial<BluetoothModuleCreate>;

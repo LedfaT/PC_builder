@@ -1,7 +1,7 @@
 import { CoolingSystem } from "@prisma/client";
 import { TypeSizeCoolingSystem } from "@prisma/client";
 
-export default class CoolingSystemListOut {
+export default class CoolingSystemCreate {
   title: string;
   heat_removal: string;
   cost: number | null;
@@ -17,3 +17,5 @@ export default class CoolingSystemListOut {
     this.type_size = CoolingSystem.type_size;
   }
 }
+
+export type TCoolingSystemUpdate = Partial<CoolingSystemCreate>;
