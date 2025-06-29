@@ -1,6 +1,5 @@
 import { WifiModule } from "@prisma/client";
-
-export default class WifiModuleUpdate {
+export default class WifiModuleCreate {
   title: string;
   generation: string;
   image: string | null;
@@ -15,3 +14,5 @@ export default class WifiModuleUpdate {
     this.title = wifi.title;
   }
 }
+
+export type TWifiModuleUpdate = Partial<WifiModuleCreate>;
