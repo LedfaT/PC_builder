@@ -1,6 +1,6 @@
 import { RAM, MemoryType, RadiatorType } from "@prisma/client";
 
-export default class RamUpdate {
+export default class RamCreate {
   title: string;
   memory_quantity: string | null;
   cost: number | null;
@@ -19,3 +19,5 @@ export default class RamUpdate {
     this.radiator_type = ram.radiator_type;
   }
 }
+
+export type TRamUpdate = Partial<RamCreate>;
