@@ -1,13 +1,13 @@
 import { Motherboard, TypeSize } from "@prisma/client";
 
-export default class motherboardUpdate {
+export default class motherboardCreate {
   title: string;
   chipset: string;
   cost: number | null;
   type_size: TypeSize;
   socket: string;
-  description: string | null;
   image: string | null;
+  description: string | null;
 
   constructor(motherboard: Motherboard) {
     this.cost = motherboard.cost;
@@ -19,3 +19,5 @@ export default class motherboardUpdate {
     this.socket = motherboard.socket;
   }
 }
+
+export type TMotherboardUpdate = Partial<motherboardCreate>;
