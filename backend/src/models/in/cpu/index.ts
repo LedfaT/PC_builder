@@ -1,6 +1,6 @@
 import { CPU } from "@prisma/client";
 
-export default class CpuUpdate {
+export default class CpuCreate {
   title: string;
   cores: string;
   cost: number;
@@ -23,3 +23,5 @@ export default class CpuUpdate {
     this.clock = cpu.clock;
   }
 }
+
+export type TCpuUpdate = Partial<CpuCreate>;

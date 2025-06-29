@@ -5,7 +5,10 @@ import CoolingSystemCreate, {
   TCoolingSystemUpdate,
 } from "@models/in/coolingSystem/coolingSystemCreate";
 import CoolingSystemOut from "@models/out/coolingSystem/coolingSystemOut";
+import DefaultParams from "@ownTypes/queryParams/defaultParams";
+import { injectable } from "inversify";
 
+injectable();
 class CoolingSystemService {
   async create(cooling: CoolingSystemCreate): Promise<void> {
     const existing = await client.coolingSystem.findFirst({
@@ -23,12 +26,7 @@ class CoolingSystemService {
     });
   }
 
-  async getAllCoolingSystems(params: {
-    page?: number;
-    limit?: number;
-    search?: string;
-    cost?: number;
-  }): Promise<{
+  async getAllCoolingSystems(params: DefaultParams): Promise<{
     meta: { count: number; totalPages: number };
     data: CoolingSystemOut[];
   }> {
