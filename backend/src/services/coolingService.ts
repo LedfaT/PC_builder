@@ -3,7 +3,7 @@ import client from "@database/index";
 import ApiError from "@exeptions/api-error";
 import CoolingSystemCreate, {
   TCoolingSystemUpdate,
-} from "@models/in/coolingSystem/coolingSystemCreate";
+} from "@models/in/coolingSystem";
 import CoolingSystemOut from "@models/out/coolingSystem";
 import DefaultParams from "@ownTypes/queryParams/defaultParams";
 import { injectable } from "inversify";
@@ -110,4 +110,4 @@ class CoolingSystemService {
   }
 }
 
-export default new CoolingSystemService();
+export default CoolingSystemService;

@@ -113,4 +113,4 @@ class BluetoothModuleService {
   }
 }
 
-export default new BluetoothModuleService();
+export default BluetoothModuleService;
