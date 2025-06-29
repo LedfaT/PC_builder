@@ -4,7 +4,7 @@ export default class WaterCoolingSystemCreate {
   title: string;
   cost: number | null;
   type_size: TypeSizeWaterCoolingSystem;
-  heat_removal: string | null;
+  heat_removal: string;
   description: string | null;
   image: string | null;
 
@@ -17,3 +17,5 @@ export default class WaterCoolingSystemCreate {
     this.heat_removal = waterCoolingSystem.heat_removal;
   }
 }
+
+export type TWaterCoolingSystemUpdate = Partial<WaterCoolingSystemCreate>;
