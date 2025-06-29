@@ -1,8 +1,8 @@
 import { RadiatorTypeSSD, SSD } from "@prisma/client";
 
-export default class SsdUpdate {
+export default class SsdCreate {
   title: string;
-  memory_quantity: string | null;
+  memory_quantity: string;
   cost: number | null;
   reading_speed: string;
   radiator_type: RadiatorTypeSSD;
@@ -21,3 +21,5 @@ export default class SsdUpdate {
     this.write_speed = ssd.write_speed;
   }
 }
+
+export type TSsdUpdate = Partial<SsdCreate>;
