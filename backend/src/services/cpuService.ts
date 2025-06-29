@@ -4,7 +4,7 @@ import ApiError from "@exeptions/api-error";
 import DefaultParams from "@ownTypes/queryParams/defaultParams";
 import { injectable } from "inversify";
 import CpuCreate, { TCpuUpdate } from "@models/in/cpu";
-import CpuOut from "@models/out/cpu/cpuOut";
+import CpuOut from "@models/out/cpu";
 
 @injectable()
 class CpuService {

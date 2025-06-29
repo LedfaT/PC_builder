@@ -4,7 +4,7 @@ import ApiError from "@exeptions/api-error";
 import CoolingSystemCreate, {
   TCoolingSystemUpdate,
 } from "@models/in/coolingSystem/coolingSystemCreate";
-import CoolingSystemOut from "@models/out/coolingSystem/coolingSystemOut";
+import CoolingSystemOut from "@models/out/coolingSystem";
 import DefaultParams from "@ownTypes/queryParams/defaultParams";
 import { injectable } from "inversify";
 

@@ -1,34 +1,34 @@
-import { CoolingSystem } from "@prisma/client";
+import { BluetoothModule } from "@prisma/client";
 import client from "@database/index";
 import ApiError from "@exeptions/api-error";
-import CoolingSystemCreate, {
-  TCoolingSystemUpdate,
-} from "@models/in/coolingSystem/coolingSystemCreate";
-import CoolingSystemOut from "@models/out/coolingSystem/coolingSystemOut";
 import DefaultParams from "@ownTypes/queryParams/defaultParams";
 import { injectable } from "inversify";
+import BluetoothModuleOut from "@models/out/bluetoothModule";
+import BluetoothModuleCreate, {
+  TBluetoothModuleUpdate,
+} from "@models/in/bluetoothModule";
 
 injectable();
-class CoolingSystemService {
-  async create(cooling: CoolingSystemCreate): Promise<void> {
-    const existing = await client.coolingSystem.findFirst({
-      where: { title: cooling.title },
+class BluetoothModuleService {
+  async create(bluetooth: BluetoothModuleCreate): Promise<void> {
+    const existing = await client.bluetoothModule.findFirst({
+      where: { title: bluetooth.title },
     });
 
     if (existing) {
       throw ApiError.BadRequest(
-        `Cooling system with title "${cooling.title}" already exists`
+        `Bluetooth module with title "${bluetooth.title}" already exists`
       );
     }
 
-    await client.coolingSystem.create({
-      data: { ...cooling },
+    await client.bluetoothModule.create({
+      data: { ...bluetooth },
     });
   }
 
-  async getAllCoolingSystems(params: DefaultParams): Promise<{
+  async getAllBluetoothModules(params: DefaultParams): Promise<{
     meta: { count: number; totalPages: number };
-    data: CoolingSystemOut[];
+    data: BluetoothModuleOut[];
   }> {
     const { page = 1, limit = 12, search, cost } = params;
     const skip = (page - 1) * limit;
@@ -46,8 +46,8 @@ class CoolingSystemService {
     }
 
     const [count, rows] = await Promise.all([
-      client.coolingSystem.count({ where }),
-      client.coolingSystem.findMany({
+      client.bluetoothModule.count({ where }),
+      client.bluetoothModule.findMany({
         where,
         skip,
         take: limit,
@@ -59,55 +59,58 @@ class CoolingSystemService {
 
     return {
       meta: { count, totalPages },
-      data: rows.map((c) => new CoolingSystemOut(c)),
+      data: rows.map((b) => new BluetoothModuleOut(b)),
     };
   }
 
-  async getCoolingSystemById(id: number): Promise<CoolingSystemOut> {
-    const cooling = await client.coolingSystem.findUnique({
+  async getBluetoothModuleById(id: number): Promise<BluetoothModuleOut> {
+    const bluerModule = await client.bluetoothModule.findUnique({
       where: { id },
     });
 
-    if (!cooling) {
-      throw ApiError.BadRequest("There are no cooling systems with such id");
+    if (!bluerModule) {
+      throw ApiError.BadRequest("There are no bluetooth modules with such id");
     }
 
-    return new CoolingSystemOut(cooling);
+    return new BluetoothModuleOut(bluerModule);
   }
 
-  async update(id: number, data: TCoolingSystemUpdate): Promise<CoolingSystem> {
-    const existing = await client.coolingSystem.findUnique({ where: { id } });
+  async update(
+    id: number,
+    data: TBluetoothModuleUpdate
+  ): Promise<BluetoothModule> {
+    const existing = await client.bluetoothModule.findUnique({ where: { id } });
     if (!existing) {
-      throw ApiError.BadRequest("Cooling system not found");
+      throw ApiError.BadRequest("Bluetooth module not found");
     }
 
-    const duplicate = await client.coolingSystem.findFirst({
+    const duplicate = await client.bluetoothModule.findFirst({
       where: { title: data.title },
     });
 
     if (duplicate && duplicate.id !== id) {
       throw ApiError.BadRequest(
-        `Cooling system with title "${data.title}" already exists`
+        `Bluetooth module with title "${data.title}" already exists`
       );
     }
 
-    return client.coolingSystem.update({
+    return client.bluetoothModule.update({
       where: { id },
       data,
     });
   }
 
-  async delete(id: number): Promise<CoolingSystem> {
-    const system = await client.coolingSystem.findUnique({ where: { id } });
+  async delete(id: number): Promise<BluetoothModule> {
+    const module = await client.bluetoothModule.findUnique({ where: { id } });
 
-    if (!system) {
-      throw ApiError.BadRequest("Cooling system not found");
+    if (!module) {
+      throw ApiError.BadRequest("Bluetooth module not found");
     }
 
-    return client.coolingSystem.delete({
+    return client.bluetoothModule.delete({
       where: { id },
     });
   }
 }
 
-export default new CoolingSystemService();
+export default new BluetoothModuleService();

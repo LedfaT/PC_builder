@@ -25,3 +25,5 @@ export default class GpuCreate {
     this.vram_type = gpu.vram_type;
   }
 }
+
+export type TGpuUpdate = Partial<GpuCreate>;
