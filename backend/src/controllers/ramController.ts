@@ -1,12 +1,80 @@
+import { Request, Response, NextFunction } from "express";
+import { inject, injectable } from "inversify";
+
 import { ramDependencyTypes } from "@ownTypes/dependencyTypes";
-import { RamService } from "@services/ramService";
-import { injectable, inject } from "inversify";
+import RamCreate, { TRamUpdate } from "@models/in/ram";
+import RamService from "@services/ramService";
 
 @injectable()
 export class RamController {
-  ramService: RamService;
+  constructor(
+    @inject(ramDependencyTypes.RamService)
+    private readonly ramService: RamService
+  ) {}
 
-  constructor(@inject(ramDependencyTypes.RamService) ramService: RamService) {
-    this.ramService = ramService;
+  async createRam(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const newRam = new RamCreate(req.body);
+      await this.ramService.create(newRam);
+      res.json({ message: "RAM created" });
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async getRam(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const { id } = req.params;
+      const ram = await this.ramService.getRamById(+id);
+      res.json(ram);
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async updateRam(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const { id } = req.params;
+      const updateData: TRamUpdate = req.body;
+      await this.ramService.update(+id, updateData);
+      res.json({ message: "RAM updated" });
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async deleteRam(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const { id } = req.params;
+      await this.ramService.delete(+id);
+      res.json({ message: "RAM deleted successfully" });
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async getAllRams(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const rams = await this.ramService.getAllRams(req.query);
+      res.json(rams);
+    } catch (e) {
+      next(e);
+    }
   }
 }
