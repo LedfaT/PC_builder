@@ -16,6 +16,7 @@ authRouter.post(
   "/registration",
   body("email").isEmail(),
   body("password").isLength({ min: 3, max: 32 }),
+  authMiddleware,
   authController.registration
 );
 authRouter.post("/login", authController.login);
