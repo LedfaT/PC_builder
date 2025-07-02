@@ -14,11 +14,11 @@ export class BluetoothModuleController {
     private readonly bluetoothService: BluetoothService
   ) {}
 
-  async createBluetoothModule(
+  createBluetoothModule = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const newBluetoothModule = new BluetoothModuleCreate(req.body);
       await this.bluetoothService.create(newBluetoothModule);
@@ -26,13 +26,13 @@ export class BluetoothModuleController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async getBluetoothModule(
+  getBluetoothModule = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const { id } = req.params;
 
@@ -42,13 +42,13 @@ export class BluetoothModuleController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async updateBluetoothModule(
+  updateBluetoothModule = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const { id } = req.params;
       const updateData: TBluetoothModuleUpdate = req.body;
@@ -57,13 +57,13 @@ export class BluetoothModuleController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async deleteBluetoothModule(
+  deleteBluetoothModule = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const { id } = req.params;
       await this.bluetoothService.delete(+id);
@@ -71,13 +71,13 @@ export class BluetoothModuleController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async getAllBluetoothModules(
+  getAllBluetoothModules = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const bluetoothModules =
         await this.bluetoothService.getAllBluetoothModules(req.query);
@@ -85,5 +85,5 @@ export class BluetoothModuleController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 }
