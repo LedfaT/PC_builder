@@ -1,12 +1,11 @@
 import client from "@database/index";
-import ApiError from "@exeptions/api-error";
 import UserCreateIn from "@models/in/userCreateIn";
-import { Token } from "@prisma/client";
+import { UserToken } from "@ownTypes/user/userToken";
 import { injectable } from "inversify";
 import jwt from "jsonwebtoken";
 
 @injectable()
-export class TokenService {
+class TokenService {
   generateToken(payload: UserCreateIn) {
     const accessToken = jwt.sign(payload, process.env.JWT_ACCESS_SECRET || "", {
       expiresIn: "30d",
@@ -50,10 +49,10 @@ export class TokenService {
     return tokenData;
   }
 
-  validateAccessToken(token: string) {
+  validateAccessToken(token: string): UserToken | null {
     try {
       const userData = jwt.verify(token, process.env.JWT_ACCESS_SECRET || "");
-      return userData;
+      return userData as UserToken;
     } catch (e) {
       return null;
     }
@@ -75,3 +74,5 @@ export class TokenService {
     return token;
   }
 }
+
+export default TokenService;

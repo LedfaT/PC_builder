@@ -8,7 +8,7 @@ import WaterCoolingSystemCreate, {
 import WaterCoolingService from "@services/waterCoolingService";
 
 @injectable()
-export class WaterCoolingSystemController {
+export default class WaterCoolingSystemController {
   constructor(
     @inject(waterCoolingDependencyTypes.WaterCoolingService)
     private readonly waterCoolingService: WaterCoolingService

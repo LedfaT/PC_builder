@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import ApiError from "@exeptions/api-error";
 import { UserToken } from "@ownTypes/user/userToken";
-const tokenService = require("../services/token-service");
+import TokenService from "@services/tokenService";
 
 declare global {
   namespace Express {
@@ -10,7 +10,7 @@ declare global {
     }
   }
 }
-
+const tokenService = new TokenService();
 const authMiddleware = function (
   req: Request,
   res: Response,

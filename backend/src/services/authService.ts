@@ -5,7 +5,7 @@ import UserCreateIn from "@models/in/userCreateIn";
 import ApiError from "@exeptions/api-error";
 import { IUserOut } from "@models/out/userOut";
 import { injectable, inject } from "inversify";
-import { TokenService } from "./tokenService";
+import TokenService from "./tokenService";
 import { userDedpendencyTypes } from "@ownTypes/dependencyTypes";
 import { MailService } from "./mailService";
 import { User, UserRole } from "@prisma/client";

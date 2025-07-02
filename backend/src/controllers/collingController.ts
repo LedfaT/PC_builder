@@ -8,7 +8,7 @@ import CoolingSystemCreate, {
 import CoolingSystemService from "@services/coolingService";
 
 @injectable()
-export class CoolingSystemController {
+export default class CoolingSystemController {
   constructor(
     @inject(coolingDependencyTypes.CoolingService)
     private readonly coolingSystemService: CoolingSystemService
