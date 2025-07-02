@@ -6,7 +6,6 @@ import BluetoothService from "@services/bleutoothService";
 import BluetoothModuleCreate, {
   TBluetoothModuleUpdate,
 } from "@models/in/bluetoothModule";
-import ApiError from "@exeptions/api-error";
 
 @injectable()
 export class BluetoothModuleController {

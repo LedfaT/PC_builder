@@ -14,11 +14,11 @@ export default class CoolingSystemController {
     private readonly coolingSystemService: CoolingSystemService
   ) {}
 
-  async createCoolingSystem(
+  createCoolingSystem = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const newCoolingSystem = new CoolingSystemCreate(req.body);
       await this.coolingSystemService.create(newCoolingSystem);
@@ -26,13 +26,13 @@ export default class CoolingSystemController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async getCoolingSystem(
+  getCoolingSystem = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const { id } = req.params;
       const coolingSystem =
@@ -41,13 +41,13 @@ export default class CoolingSystemController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async updateCoolingSystem(
+  updateCoolingSystem = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const { id } = req.params;
       const updateData: TCoolingSystemUpdate = req.body;
@@ -56,13 +56,13 @@ export default class CoolingSystemController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async deleteCoolingSystem(
+  deleteCoolingSystem = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const { id } = req.params;
       await this.coolingSystemService.delete(+id);
@@ -70,13 +70,13 @@ export default class CoolingSystemController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async getAllCoolingSystems(
+  getAllCoolingSystems = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const coolingSystems =
         await this.coolingSystemService.getAllCoolingSystems(req.query);
@@ -84,5 +84,5 @@ export default class CoolingSystemController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 }

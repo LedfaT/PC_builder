@@ -11,6 +11,9 @@ import {
   waterCoolingDependencyTypes,
   powerSupplyDependencyTypes,
   towerDependencyTypes,
+  bluetoothDependencyTypes,
+  wifiDependencyTypes,
+  hddDependencyTypes,
 } from "@ownTypes/dependencyTypes";
 import { AuthService } from "@services/authService";
 import { AuthController } from "@controllers/authController";
@@ -34,6 +37,12 @@ import PowerSupplyService from "@services/powerSupplyService";
 import { PowerSupplyController } from "@controllers/powerSupplyController";
 import TowerService from "@services/towerService";
 import { TowerController } from "@controllers/towerController";
+import BluetoothModuleService from "@services/bleutoothService";
+import { BluetoothModuleController } from "@controllers/buetoothController";
+import WifiModuleService from "@services/wifiService";
+import { WifiController } from "@controllers/wifiController";
+import { HddController } from "@controllers/hddControlller";
+import HddService from "@services/hddService";
 
 const container = new Container();
 
@@ -45,8 +54,21 @@ container.bind(userDedpendencyTypes.TokenService).to(TokenService);
 container.bind(cpuDependencyTypes.CpuService).to(CpuService);
 container.bind(cpuDependencyTypes.CpuController).to(CpuController);
 
+container
+  .bind(bluetoothDependencyTypes.BluetoothService)
+  .to(BluetoothModuleService);
+container
+  .bind(bluetoothDependencyTypes.BluetoothController)
+  .to(BluetoothModuleController);
+
 container.bind(gpuDependencyTypes.GpuService).to(GpuService);
 container.bind(gpuDependencyTypes.GpuController).to(GpuController);
+
+container.bind(hddDependencyTypes.HddService).to(HddService);
+container.bind(hddDependencyTypes.HddController).to(HddController);
+
+container.bind(wifiDependencyTypes.WifiService).to(WifiModuleService);
+container.bind(wifiDependencyTypes.WifiController).to(WifiController);
 
 container.bind(ssdDependencyTypes.SsdService).to(SsdService);
 container.bind(ssdDependencyTypes.SsdController).to(SsdController);

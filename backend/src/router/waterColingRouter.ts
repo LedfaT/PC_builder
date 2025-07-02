@@ -1,5 +1,5 @@
 import { container } from "@config/container";
-import { WaterCoolingSystemController } from "@controllers/waterCoolingController";
+import WaterCoolingSystemController from "@controllers/waterCoolingController";
 import { waterCoolingDependencyTypes } from "@ownTypes/dependencyTypes";
 import { Router } from "express";
 
