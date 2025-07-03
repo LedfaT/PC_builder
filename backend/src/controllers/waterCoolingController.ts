@@ -14,11 +14,11 @@ export default class WaterCoolingSystemController {
     private readonly waterCoolingService: WaterCoolingService
   ) {}
 
-  async createWaterCoolingSystem(
+  createWaterCoolingSystem = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const newWaterCoolingSystem = new WaterCoolingSystemCreate(req.body);
       await this.waterCoolingService.create(newWaterCoolingSystem);
@@ -26,13 +26,13 @@ export default class WaterCoolingSystemController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async getWaterCoolingSystem(
+  getWaterCoolingSystem = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const { id } = req.params;
       const waterCoolingSystem =
@@ -41,13 +41,13 @@ export default class WaterCoolingSystemController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async updateWaterCoolingSystem(
+  updateWaterCoolingSystem = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const { id } = req.params;
       const updateData: TWaterCoolingSystemUpdate = req.body;
@@ -56,13 +56,13 @@ export default class WaterCoolingSystemController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async deleteWaterCoolingSystem(
+  deleteWaterCoolingSystem = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const { id } = req.params;
       await this.waterCoolingService.delete(+id);
@@ -70,13 +70,13 @@ export default class WaterCoolingSystemController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async getAllWaterCoolingSystems(
+  getAllWaterCoolingSystems = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const list = await this.waterCoolingService.getAllWaterCoolingSystems(
         req.query
@@ -85,5 +85,5 @@ export default class WaterCoolingSystemController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 }
