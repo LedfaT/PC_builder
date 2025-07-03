@@ -12,11 +12,11 @@ export class MotherboardController {
     private readonly motherboardService: MotherboardService
   ) {}
 
-  async createMotherboard(
+  createMotherboard = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const newMotherboard = new MotherboardCreate(req.body);
       await this.motherboardService.create(newMotherboard);
@@ -24,13 +24,13 @@ export class MotherboardController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async getMotherboard(
+  getMotherboard = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const { id } = req.params;
       const motherboard = await this.motherboardService.getMotherboardById(+id);
@@ -38,13 +38,13 @@ export class MotherboardController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async updateMotherboard(
+  updateMotherboard = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const { id } = req.params;
       const updateData: TMotherboardUpdate = req.body;
@@ -53,13 +53,13 @@ export class MotherboardController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async deleteMotherboard(
+  deleteMotherboard = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const { id } = req.params;
       await this.motherboardService.delete(+id);
@@ -67,13 +67,13 @@ export class MotherboardController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async getAllMotherboards(
+  getAllMotherboards = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const motherboards = await this.motherboardService.getAllMotherboards(
         req.query
@@ -82,5 +82,5 @@ export class MotherboardController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 }
