@@ -1,0 +1,305 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URI")
+}
+
+
+/////////// User     table ///////////
+model User {
+    id        Int   @id @default(autoincrement())
+    email     String   @unique
+    username      String 
+    password  String
+    user_role  UserRole @default(USER)
+    isActivated Boolean @default(false)
+    activationLink String?
+    tokens Token?
+    createdAt DateTime? @default(now())
+    updatedAt DateTime? @updatedAt
+
+    @@map("user")
+}
+
+enum UserRole {
+    USER
+    ADMIN
+
+}
+/////////// User table ///////////
+
+
+/////////// Token table ///////////
+model Token{
+    id Int @id @default(autoincrement())
+    refreshToken String 
+    userId Int  @unique
+    user User @relation(fields: [userId], references: [id])
+
+    @@map("token")
+}
+/////////// Token table ///////////
+
+//////////// CPU table ///////////
+model CPU {
+    id Int @id @default(autoincrement())
+    title String
+    cost Float
+    description String? @db.Text
+    image String? @db.Text
+    cores String
+    threads String
+    Architecture String
+    cache String
+    clock String
+    createdAt DateTime? @default(now())
+    updatedAt DateTime? @updatedAt
+
+    @@map("cpu")
+}
+//////////// CPU table ///////////
+
+//////////// GPU table ///////////
+model GPU {
+  id            Int     @id @default(autoincrement())
+  title         String
+  description   String? @db.Text
+  cores         String
+  image         String? @db.Text
+  threads       String
+  vram_quantity String
+  cache         String
+  clock         String
+  vram_type     String
+  cost          Float?
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @updatedAt
+
+  @@map("gpu")
+}
+//////////// GPU table ///////////
+
+//////////// HDD table ///////////
+model HDD {
+  id              Int     @id @default(autoincrement())
+  title           String
+  description     String? @db.Text
+  image           String? @db.Text
+  memory_quantity String
+  reading_speed   String
+  write_speed     String
+  cost            Float?
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @updatedAt
+
+  @@map("hdd")
+}
+//////////// HDD table ///////////
+
+//////////// RAM table ///////////
+model RAM {
+  id              Int     @id @default(autoincrement())
+  title           String
+  description     String? @db.Text
+  image           String? @db.Text
+  memory_quantity String?
+  memory_type     MemoryType
+  radiator_type   RadiatorType
+  cost            Float?
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @updatedAt
+  @@map("ram")
+}
+
+enum MemoryType {
+  None
+  DDR3
+  DDR4
+  DDR5
+}
+
+enum RadiatorType {
+  None
+  Aluminium
+  Fan
+  Water
+}
+//////////// RAM table ///////////
+
+//////////// Motherboard table ///////////
+model Motherboard {
+  id          Int     @id @default(autoincrement())
+  title       String
+  description String? @db.Text
+  image       String? @db.Text
+  chipset     String
+  type_size   TypeSize
+  socket      String
+  cost        Float?
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @updatedAt
+
+
+  @@map("motherboard")
+}
+
+enum TypeSize {
+    None
+    ATX
+    MicroATX
+    MiniITX
+  }
+//////////// Motherboard table ///////////
+
+//////////// PowerSupply table ///////////
+model PowerSupply {
+  id          Int     @id @default(autoincrement())
+  title       String
+  description String? @db.Text
+  image       String? @db.Text
+  strength    Int
+  sertificate String?
+  cost        Float?
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @updatedAt
+
+  @@map("power_supply")
+}
+//////////// PowerSupply table ///////////
+
+//////////// Tower table ///////////
+model Tower {
+  id           Int       @id @default(autoincrement())
+  title        String
+  description  String?   
+  image        String?   
+  fan_included Boolean   @default(true)
+  type_size    TypeSizeTower       
+  fan_type     FanType     
+  cost         Float?
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @updatedAt
+
+  @@map("tower")
+}
+
+enum FanType {
+  mm200
+  mm120
+  mm92
+}
+
+enum TypeSizeTower {
+  None
+  Full_Tower
+  Mid_Tower
+  Mini_Tower
+}
+//////////// Tower table ///////////
+
+//////////// Wifi Module table ///////////
+model WifiModule {
+  id          Int       @id @default(autoincrement())
+  title       String
+  description String?   
+  image       String?   
+  generation  String
+  cost        Float?
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @updatedAt
+
+  @@map("wifi_module") 
+}
+//////////// Wifi Module table ///////////
+
+//////////// SSD table ///////////
+model SSD {
+  id              Int       @id @default(autoincrement())
+  title           String
+  description     String?   
+  image           String?   
+  memory_quantity String
+  radiator_type   RadiatorTypeSSD   
+  reading_speed   String
+  write_speed     String
+  cost            Float?
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @updatedAt
+
+  @@map("ssd") 
+}
+
+enum RadiatorTypeSSD {
+  None
+  Aluminium
+  Fan
+}
+//////////// SSD table ///////////
+
+//////////// Bluetooth module table ///////////
+model BluetoothModule {
+  id          Int       @id @default(autoincrement())
+  title       String
+  image       String?   
+  description String?   
+  generation  String
+  cost        Float?
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @updatedAt
+
+  @@map("bluetooth_module")
+} 
+//////////// Bluetooth module table ///////////
+
+//////////// Cooling system table ///////////
+model CoolingSystem {
+  id           Int       @id @default(autoincrement())
+  title        String
+  image        String?   
+  description  String?   
+  type_size    TypeSizeCoolingSystem        
+  heat_removal String
+  cost         Float?
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @updatedAt
+
+  @@map("cooling_system")
+}
+
+enum TypeSizeCoolingSystem {
+  mm280
+  mm360
+  mm240
+}
+//////////// Cooling system table ///////////
+
+//////////// Water cooling system table ///////////
+model WaterCoolingSystem {
+  id           Int       @id @default(autoincrement())
+  title        String
+  image        String?   
+  description  String?   
+  type_size    TypeSizeWaterCoolingSystem       
+  heat_removal String
+  cost         Float?
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @updatedAt
+
+  @@map("water_cooling_system")
+}
+
+enum TypeSizeWaterCoolingSystem {
+  mm280
+  mm360
+  mm240
+}
+//////////// Water cooling system table ///////////

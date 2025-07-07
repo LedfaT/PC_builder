@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "target": "es2020",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "module": "commonjs",
+    "rootDir": "./src",
+    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "types": [],
+    "skipLibCheck": true,
+    "paths": {
+      "@services/*": ["./src/services/*"],
+      "@router/*": ["./src/router/*"],
+      "@controllers/*": ["./src/controllers/*"],
+      "@middlewares/*": ["./src/middlewares/*"],
+      "@config/*": ["./src/config/*"],
+      "@models/*": ["./src/models/*"],
+      "@exeptions/*": ["./src/exeptions/*"],
+      "@ownTypes/*": ["./src/types/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@database/*": ["./src/database/*"]
+    }
+  },
+  "include": ["src/**/*"]
+}
