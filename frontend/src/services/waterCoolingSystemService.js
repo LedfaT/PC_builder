@@ -7,7 +7,7 @@ export default class WaterCoolingSystemService {
 
   static async getAllSystems(page, limit, search = "") {
     return $api.get(
-      /api/water-cooling-system/list?page=${page}&limit=${limit}&search=${search}
+      `/api/water-cooling-system/list?page=${page}&limit=${limit}&search=${search}`
     );
   }
 

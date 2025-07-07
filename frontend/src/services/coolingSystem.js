@@ -7,7 +7,7 @@ export default class CollingSystemService {
 
   static async getAllCollingSystems(page, limit, search = "") {
     return $api.get(
-      /api/cooling-system/list?page=${page}&limit=${limit}&search=${search}
+      ` /api/cooling-system/list?page=${page}&limit=${limit}&search=${search}`
     );
   }
 

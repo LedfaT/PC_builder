@@ -7,7 +7,7 @@ export default class HddService {
 
   static async getAllHdds(page, limit, search = "") {
     return $api.get(
-      /api/HDD/list?page=${page}&limit=${limit}&search=${search}
+      `/api/HDD/list?page=${page}&limit=${limit}&search=${search}`
     );
   }
 

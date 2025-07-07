@@ -7,7 +7,7 @@ export default class PowerSupplyService {
 
   static async getAllSupplies(page, limit, search = "") {
     return $api.get(
-      /api/power-supply/list?page=${page}&limit=${limit}&search=${search}
+      `/api/power-supply/list?page=${page}&limit=${limit}&search=${search}`
     );
   }
 

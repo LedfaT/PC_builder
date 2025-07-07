@@ -11,7 +11,7 @@ export default class ComputerService {
 
   static async getAllUserComputers(page, limit) {
     return $api.get(
-      /api/computer/user-computers/list?page=${page}&limit=${limit}
+      `/api/computer/user-computers/list?page=${page}&limit=${limit}`
     );
   }
 
@@ -21,13 +21,13 @@ export default class ComputerService {
 
   static async getAdminPublicComputersList(page, limit, search = "", type) {
     return $api.get(
-      /api/computer/admins-public/list?page=${page}&limit=${limit}&search=${search}&type=${type}
+      `/api/computer/admins-public/list?page=${page}&limit=${limit}&search=${search}&type=${type}`
     );
   }
 
   static async getUserPublicComputersList(page, limit, search = "", type) {
     return $api.get(
-      /api/computer/users-public/list?page=${page}&limit=${limit}&search=${search}&type=${type}
+      `/api/computer/users-public/list?page=${page}&limit=${limit}&search=${search}&type=${type}`
     );
   }
 

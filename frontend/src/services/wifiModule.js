@@ -7,7 +7,7 @@ export default class WifiModuleService {
 
   static async getAllWifiModules(page, limit, search = "") {
     return $api.get(
-      /api/wifi-module/list?page=${page}&limit=${limit}&search=${search}
+      `/api/wifi-module/list?page=${page}&limit=${limit}&search=${search}`
     );
   }
 

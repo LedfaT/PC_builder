@@ -7,7 +7,7 @@ export default class CpuService {
 
   static async getAllCpus(page, limit, search = "") {
     return $api.get(
-      /api/CPU/list?page=${page}&limit=${limit}&search=${search}
+      `/api/CPU/list?page=${page}&limit=${limit}&search=${search}`
     );
   }
 

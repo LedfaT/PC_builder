@@ -7,7 +7,7 @@ export default class MotherboardService {
 
   static async getAllMotherboards(page, limit, search = "") {
     return $api.get(
-      /api/motherboard/list?page=${page}&limit=${limit}&search=${search}
+      `/api/motherboard/list?page=${page}&limit=${limit}&search=${search}`
     );
   }
 
