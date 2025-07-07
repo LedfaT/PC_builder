@@ -7,7 +7,7 @@ export default class TowerService {
 
   static async getAllTowers(page, limit, search = "") {
     return $api.get(
-      /api/tower/list?page=${page}&limit=${limit}&search=${search}
+      `/api/tower/list?page=${page}&limit=${limit}&search=${search}`
     );
   }
 

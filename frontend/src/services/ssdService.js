@@ -7,7 +7,7 @@ export default class SsdService {
 
   static async getAllSsds(page, limit, search = "") {
     return $api.get(
-      /api/SSD/list?page=${page}&limit=${limit}&search=${search}
+      `/api/SSD/list?page=${page}&limit=${limit}&search=${search}`
     );
   }
 

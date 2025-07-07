@@ -7,7 +7,7 @@ export default class GpuService {
 
   static async getAllGpus(page, limit, search = "") {
     return $api.get(
-      /api/GPU/list?page=${page}&limit=${limit}&search=${search}
+      `/api/GPU/list?page=${page}&limit=${limit}&search=${search}`
     );
   }
 
