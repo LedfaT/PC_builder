@@ -50,7 +50,7 @@ class CoolingSystemService {
       client.coolingSystem.findMany({
         where,
         skip,
-        take: limit,
+        take: +limit,
         orderBy: { id: "asc" },
       }),
     ]);

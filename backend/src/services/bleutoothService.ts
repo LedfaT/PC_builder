@@ -50,7 +50,7 @@ class BluetoothModuleService {
       client.bluetoothModule.findMany({
         where,
         skip,
-        take: limit,
+        take: +limit,
         orderBy: { id: "asc" },
       }),
     ]);
