@@ -5,6 +5,7 @@ export default class ComputerCreate {
   description: string | null;
   image: string | null;
   isPublished: boolean;
+  type: string;
   cost: number | null;
   createdAt: Date | null;
 
@@ -27,6 +28,7 @@ export default class ComputerCreate {
     this.description = data.description;
     this.image = data.image;
     this.isPublished = data.isPublished;
+    this.type = data.type;
     this.cost = data.cost;
     this.createdAt = data.createdAt;
 

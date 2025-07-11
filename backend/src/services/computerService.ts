@@ -33,7 +33,7 @@ class ComputerService {
       prisma.computer.findMany({
         where: { userId },
         skip: offset,
-        take: limit,
+        take: +limit,
         include: this.defaultIncludes(),
       }),
     ]);
@@ -60,7 +60,7 @@ class ComputerService {
       prisma.computer.findMany({
         where,
         skip: offset,
-        take: limit,
+        take: +limit,
         include: this.defaultIncludesWithUser(),
       }),
     ]);
@@ -91,7 +91,7 @@ class ComputerService {
       prisma.computer.findMany({
         where,
         skip: offset,
-        take: limit,
+        take: +limit,
         include: this.defaultIncludesWithUser(),
       }),
     ]);
@@ -120,7 +120,7 @@ class ComputerService {
       prisma.computer.findMany({
         where,
         skip: offset,
-        take: limit,
+        take: +limit,
         include: this.defaultIncludesWithUser(),
       }),
     ]);
@@ -171,7 +171,7 @@ class ComputerService {
       gpu: true,
       hdd: true,
       motherboard: true,
-      powerSupply: true,
+      powersupply: true,
       ram: true,
       ssd: true,
       waterCoolingSystem: true,

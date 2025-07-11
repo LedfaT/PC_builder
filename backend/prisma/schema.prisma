@@ -338,6 +338,7 @@ model Computer {
   description     String?   @db.Text
   image           String?   @db.Text
   isPublished     Boolean @default(false)
+  type            String
   cost            Float?
   createdAt       DateTime? @default(now())
   updatedAt       DateTime? @updatedAt
