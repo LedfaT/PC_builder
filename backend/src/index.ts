@@ -27,7 +27,7 @@ app.use(
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/api", authRouter);
+app.use("/api/auth", authRouter);
 app.use("/api/bluetooth-module", bluetoothRouter);
 app.use("/api/cooling-system", coolingRouter);
 app.use("/api/wifi-module", wifiRouter);
