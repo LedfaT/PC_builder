@@ -128,6 +128,52 @@ const Configurator = () => {
   };
 
   const handleAddToBuild = (component, category) => {
+    const updatedBuild = { ...build };
+
+    if (category === "CPU" && updatedBuild["Motherboard"]) {
+      if (component.socket !== updatedBuild["Motherboard"].socket) {
+        notify("Socket mismatch with selected motherboard!", "error");
+        return;
+      }
+    }
+
+    if (category === "Motherboard" && updatedBuild["CPU"]) {
+      if (component.socket !== updatedBuild["CPU"].socket) {
+        notify("Socket mismatch with selected CPU!", "error");
+        return;
+      }
+    }
+
+    if (category === "RAM" && updatedBuild["Motherboard"]) {
+      if (component.memoryType !== updatedBuild["Motherboard"].memoryType) {
+        notify("RAM type is incompatible with selected motherboard!", "error");
+        return;
+      }
+    }
+
+    if (category === "Motherboard" && updatedBuild["RAM"]) {
+      if (component.memoryType !== updatedBuild["RAM"].memoryType) {
+        notify("Motherboard does not support installed RAM type!", "error");
+        return;
+      }
+    }
+
+    if (["FCS", "WCS"].includes(category)) {
+      const other = category === "FCS" ? "WCS" : "FCS";
+      if (updatedBuild[other]) {
+        notify("You can add either Fan or Water Cooling, not both!", "error");
+        return;
+      }
+    }
+
+    if (["HDD", "SSD"].includes(category)) {
+      const other = category === "HDD" ? "SSD" : "HDD";
+      if (updatedBuild[other]) {
+        notify("You can add either HDD or SSD, not both!", "error");
+        return;
+      }
+    }
+
     if (build[category]) {
       console.log(build);
       setPendingPart(component);
