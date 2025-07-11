@@ -5,6 +5,7 @@ import {
 } from "@prisma/client";
 import ComputerOut from "../models/out/computer";
 import ApiError from "../exeptions/api-error";
+import { injectable } from "inversify";
 
 const prisma = new PrismaClient();
 
@@ -15,6 +16,7 @@ interface PaginationParams {
   type?: string;
 }
 
+@injectable()
 class ComputerService {
   async create(computerData: Omit<ComputerModel, "id">) {
     await prisma.computer.create({ data: computerData });
