@@ -16,6 +16,7 @@ import motherboardRouter from "@router/motherboardRouter";
 import powerSupplyRouter from "@router/powerSupplyRouter";
 import towerRouter from "@router/towerRouter";
 import ramRouter from "@router/ramRouter";
+import computerRouter from "@router/computerRouter";
 
 const app = express();
 app.use(
@@ -27,7 +28,7 @@ app.use(
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/api", authRouter);
+app.use("/api/auth", authRouter);
 app.use("/api/bluetooth-module", bluetoothRouter);
 app.use("/api/cooling-system", coolingRouter);
 app.use("/api/wifi-module", wifiRouter);
@@ -40,7 +41,7 @@ app.use("/api/motherboard", motherboardRouter);
 app.use("/api/power-supply", powerSupplyRouter);
 app.use("/api/tower", towerRouter);
 app.use("/api/RAM", ramRouter);
-// app.use("/api/computer", computerRouter);
+app.use("/api/computer", computerRouter);
 app.use(errorMiddleware);
 
 const port = process.env.PORT ? Number(process.env.PORT) : 8080;

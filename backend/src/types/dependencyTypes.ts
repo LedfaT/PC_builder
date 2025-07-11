@@ -15,6 +15,11 @@ export const gpuDependencyTypes = {
   GpuController: Symbol.for("GpuController"),
 };
 
+export const computerDependencyTypes = {
+  ComputerService: Symbol.for("ComputerService"),
+  ComputerController: Symbol.for("ComputerController"),
+};
+
 export const ssdDependencyTypes = {
   SsdService: Symbol.for("SsdService"),
   SsdController: Symbol.for("SsdController"),

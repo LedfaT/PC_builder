@@ -7,9 +7,9 @@ function ProtectedRoute({ redirectTo = "/403", children }) {
   const { store } = useContext(Context);
   const user = store.getData()?.user;
 
-  if (!user || user.user_role !== "ADMIN") {
-    return <Navigate to={redirectTo} replace />;
-  }
+  // if (!user || user.user_role !== "ADMIN") {
+  //   return <Navigate to={redirectTo} replace />;
+  // }
 
   return children;
 }

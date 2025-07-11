@@ -12,11 +12,11 @@ export class SsdController {
     private readonly ssdService: SsdService
   ) {}
 
-  async createSsd(
+  createSsd = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const newSsd = new SsdCreate(req.body);
       await this.ssdService.create(newSsd);
@@ -24,9 +24,13 @@ export class SsdController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async getSsd(req: Request, res: Response, next: NextFunction): Promise<void> {
+  getSsd = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
     try {
       const { id } = req.params;
       const ssd = await this.ssdService.getSsdById(+id);
@@ -34,13 +38,13 @@ export class SsdController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async updateSsd(
+  updateSsd = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const { id } = req.params;
       const updateData: TSsdUpdate = req.body;
@@ -49,13 +53,13 @@ export class SsdController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async deleteSsd(
+  deleteSsd = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const { id } = req.params;
       await this.ssdService.delete(+id);
@@ -63,18 +67,18 @@ export class SsdController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async getAllSsds(
+  getAllSsds = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const ssds = await this.ssdService.getAllSsds(req.query);
       res.json(ssds);
     } catch (e) {
       next(e);
     }
-  }
+  };
 }

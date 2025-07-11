@@ -12,11 +12,11 @@ export class CpuController {
     private readonly cpuService: CpuService
   ) {}
 
-  async createCpu(
+  createCpu = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const newCpu = new CpuCreate(req.body);
       await this.cpuService.create(newCpu);
@@ -24,9 +24,13 @@ export class CpuController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async getCpu(req: Request, res: Response, next: NextFunction): Promise<void> {
+  getCpu = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
     try {
       const { id } = req.params;
       const cpu = await this.cpuService.getCpuById(+id);
@@ -34,13 +38,13 @@ export class CpuController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async updateCpu(
+  updateCpu = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const { id } = req.params;
       const updateData: TCpuUpdate = req.body;
@@ -49,13 +53,13 @@ export class CpuController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async deleteCpu(
+  deleteCpu = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const { id } = req.params;
       await this.cpuService.delete(+id);
@@ -63,18 +67,18 @@ export class CpuController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async getAllCpus(
+  getAllCpus = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const cpus = await this.cpuService.getAllCpus(req.query);
       res.json(cpus);
     } catch (e) {
       next(e);
     }
-  }
+  };
 }

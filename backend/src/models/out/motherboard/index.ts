@@ -1,4 +1,4 @@
-import { Motherboard, TypeSize } from "@prisma/client";
+import { MemoryType, Motherboard, SocketType, TypeSize } from "@prisma/client";
 
 export default class motherboardOut {
   id: number;
@@ -6,12 +6,12 @@ export default class motherboardOut {
   chipset: string;
   cost: number | null;
   type_size: TypeSize;
-  socket: string;
+  socket: SocketType;
   createdAt: Date | null;
   updatedAt: Date | null;
   description: string | null;
   image: string | null;
-
+  supported_memory_type: MemoryType;
   constructor(motherboard: Motherboard) {
     this.id = motherboard.id;
     this.cost = motherboard.cost;
@@ -19,6 +19,7 @@ export default class motherboardOut {
     this.title = motherboard.title;
     this.image = motherboard.image;
     this.description = motherboard.description;
+    this.supported_memory_type = motherboard.supported_memory_type;
     this.type_size = motherboard.type_size;
     this.socket = motherboard.socket;
     this.createdAt = motherboard.createdAt;
