@@ -21,17 +21,18 @@ export default function CPUPage() {
     "clock",
     "cost",
   ];
-  let totalPages = 1;
   const [data, setData] = useState([]);
   const [page, setPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(1);
+
   const [limit, setLimit] = useState(6);
   const fetchData = async function () {
     try {
       const response = await CpuService.getAllCpus(page + 1, limit);
-      console.log(response);
       if (response.status === 200) {
+        console.log(response.data);
         setData(response.data.data);
-        totalPages = response.data.meta.totalPagesa;
+        setTotalPages(response.data.meta.totalPages);
       }
     } catch (e) {
       console.log(e);

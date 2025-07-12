@@ -1,27 +1,45 @@
-import { useState } from "react";
-import {
-  TextField,
-  Box,
-  MenuItem,
-  Select,
-  FormControl,
-  InputLabel,
-} from "@mui/material";
+import { useEffect, useState } from "react";
+import { TextField, Box } from "@mui/material";
 import ModalWrapper from "@/components/ui/ModalWrapper";
 
-export default function AddCpuModal({ open, onClose, onSubmit, isLoading }) {
+export default function EditGpuModal({
+  open,
+  onClose,
+  onSubmit,
+  isLoading,
+  data = null,
+}) {
+  if (!data) {
+    return null;
+  }
   const [formData, setFormData] = useState({
     title: "",
     description: "",
     image: "",
     cores: "",
     threads: "",
-    Architecture: "",
-    socket: "",
+    vram_quantity: "",
+    vram_type: "",
     cache: "",
     clock: "",
     cost: "",
   });
+
+  useEffect(() => {
+    setFormData({
+      id: data.id || "",
+      title: data.title || "",
+      description: data.description || "",
+      image: data.image || "",
+      cores: data.cores || "",
+      threads: data.threads || "",
+      vram_quantity: data.vram_quantity || "",
+      vram_type: data.vram_type || "",
+      cache: data.cache || "",
+      clock: data.clock || "",
+      cost: data.cost || "",
+    });
+  }, [data]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -38,19 +56,20 @@ export default function AddCpuModal({ open, onClose, onSubmit, isLoading }) {
       onClose={onClose}
       onSubmit={handleSubmit}
       isLoading={isLoading}
-      title="Add CPU"
+      title="Edit GPU"
       submitText="Save"
     >
       <Box component="form" className="flex flex-col gap-2">
         {[
           "title",
           "description",
-          "image",
           "cores",
+          "image",
           "threads",
-          "Architecture",
+          "vram_quantity",
           "cache",
           "clock",
+          "vram_type",
           "cost",
         ].map((key) => (
           <TextField
@@ -66,21 +85,6 @@ export default function AddCpuModal({ open, onClose, onSubmit, isLoading }) {
             }
           />
         ))}
-
-        <FormControl fullWidth>
-          <InputLabel id="radiator-type-label">Socket</InputLabel>
-          <Select
-            labelId="radiator-type-label"
-            name="socket"
-            value={formData.socket}
-            onChange={handleChange}
-            label="Socket"
-          >
-            <MenuItem value="AM4">AM4</MenuItem>
-            <MenuItem value="LGA1200">LGA1200</MenuItem>
-            <MenuItem value="LGA1700">LGA1700</MenuItem>
-          </Select>
-        </FormControl>
       </Box>
     </ModalWrapper>
   );
