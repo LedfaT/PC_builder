@@ -11,7 +11,7 @@ export default class motherboardCreate {
   supported_memory_type: MemoryType;
 
   constructor(motherboard: Motherboard) {
-    this.cost = motherboard.cost;
+    this.cost = motherboard.cost ? +motherboard.cost : 0;
     this.chipset = motherboard.chipset;
     this.title = motherboard.title;
     this.image = motherboard.image;

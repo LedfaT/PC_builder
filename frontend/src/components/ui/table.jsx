@@ -42,7 +42,7 @@ export default function DataTable({
             </TableRow>
           </TableHead>
           <TableBody>
-            {paginatedData.map((row) => (
+            {data.map((row) => (
               <TableRow key={row.id}>
                 {headers.map((headerKey) => (
                   <TableCell key={headerKey}>

@@ -1,4 +1,4 @@
-import { Outlet, Link, Navigate } from "react-router-dom";
+import { Outlet, Link, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import {
   Box,
@@ -31,16 +31,22 @@ const routes = [
 ];
 
 export default function AdminLayout() {
+  const location = useLocation();
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
 
+      {/* Тёмная шапка */}
       <AppBar
         position="fixed"
-        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        sx={{
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+          backgroundColor: "#1e1e2f", // глубокий тёмный
+        }}
       >
         <Toolbar>
-          <Typography variant="h6" noWrap>
+          <Typography variant="h6" noWrap component="div" color="white">
             Admin Panel
           </Typography>
         </Toolbar>
@@ -54,6 +60,7 @@ export default function AdminLayout() {
         pauseOnHover
       />
 
+      {/* Тёмное меню */}
       <Drawer
         variant="permanent"
         sx={{
@@ -62,6 +69,8 @@ export default function AdminLayout() {
           [`& .MuiDrawer-paper`]: {
             width: drawerWidth,
             boxSizing: "border-box",
+            backgroundColor: "#121212",
+            color: "#ffffff",
           },
         }}
       >
@@ -70,8 +79,27 @@ export default function AdminLayout() {
           <List>
             {routes.map(({ text, to }) => (
               <ListItem key={text} disablePadding>
-                <ListItemButton component={Link} to={to}>
-                  <ListItemText primary={text} />
+                <ListItemButton
+                  component={Link}
+                  to={to}
+                  selected={location.pathname === to}
+                  sx={{
+                    color: "inherit",
+                    "&.Mui-selected": {
+                      backgroundColor: "#333",
+                      "&:hover": {
+                        backgroundColor: "#444",
+                      },
+                    },
+                    "&:hover": {
+                      backgroundColor: "#222",
+                    },
+                  }}
+                >
+                  <ListItemText
+                    primary={text}
+                    primaryTypographyProps={{ sx: { color: "white" } }}
+                  />
                 </ListItemButton>
               </ListItem>
             ))}
@@ -79,7 +107,16 @@ export default function AdminLayout() {
         </Box>
       </Drawer>
 
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      {/* Светлый основной контент */}
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          backgroundColor: "#f9f9f9", // светлый фон
+          minHeight: "100vh",
+        }}
+      >
         <Toolbar />
         <Outlet />
       </Box>
