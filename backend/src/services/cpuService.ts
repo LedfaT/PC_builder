@@ -46,7 +46,7 @@ class CpuService {
       client.cPU.findMany({
         where,
         skip,
-        take: limit,
+        take: +limit,
         orderBy: { id: "asc" },
       }),
     ]);

@@ -48,7 +48,7 @@ class TowerService {
       client.tower.findMany({
         where,
         skip,
-        take: limit,
+        take: +limit,
         orderBy: { id: "asc" },
       }),
     ]);

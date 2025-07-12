@@ -12,11 +12,11 @@ export class TowerController {
     private readonly towerService: TowerService
   ) {}
 
-  async createTower(
+  createTower = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const newTower = new TowerCreate(req.body);
       await this.towerService.create(newTower);
@@ -24,13 +24,13 @@ export class TowerController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async getTower(
+  getTower = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const { id } = req.params;
       const tower = await this.towerService.getTowerById(+id);
@@ -38,13 +38,13 @@ export class TowerController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async updateTower(
+  updateTower = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const { id } = req.params;
       const updateData: TTowerUpdate = req.body;
@@ -53,13 +53,13 @@ export class TowerController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async deleteTower(
+  deleteTower = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const { id } = req.params;
       await this.towerService.delete(+id);
@@ -67,18 +67,18 @@ export class TowerController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async getAllTowers(
+  getAllTowers = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const towers = await this.towerService.getAllTowers(req.query);
       res.json(towers);
     } catch (e) {
       next(e);
     }
-  }
+  };
 }

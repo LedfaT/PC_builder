@@ -7,7 +7,7 @@ export default class RamService {
 
   static async getAllRams(page, limit, search = "") {
     return $api.get(
-      ` /api/RAM/list?page=${page}&limit=${limit}&search=${search}`
+      `/api/RAM/list?page=${page}&limit=${limit}&search=${search}`
     );
   }
 

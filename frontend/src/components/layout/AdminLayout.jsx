@@ -1,4 +1,5 @@
 import { Outlet, Link, Navigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import {
   Box,
   Drawer,
@@ -44,6 +45,14 @@ export default function AdminLayout() {
           </Typography>
         </Toolbar>
       </AppBar>
+
+      <ToastContainer
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        draggable
+        pauseOnHover
+      />
 
       <Drawer
         variant="permanent"

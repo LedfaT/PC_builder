@@ -1,4 +1,4 @@
-import { CPU } from "@prisma/client";
+import { CPU, SocketType } from "@prisma/client";
 
 export default class CputOut {
   id: number;
@@ -13,6 +13,7 @@ export default class CputOut {
   updatedAt: Date | null;
   description: string | null;
   image: string | null;
+  socket: SocketType;
   constructor(cpu: CPU) {
     this.id = cpu.id;
     this.cost = cpu.cost;
@@ -23,6 +24,7 @@ export default class CputOut {
     this.threads = cpu.threads;
     this.Architecture = cpu.Architecture;
     this.cache = cpu.cache;
+    this.socket = cpu.socket;
     this.clock = cpu.clock;
     this.createdAt = cpu.createdAt;
     this.updatedAt = cpu.updatedAt;
