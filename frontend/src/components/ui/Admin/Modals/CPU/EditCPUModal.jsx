@@ -1,12 +1,19 @@
 import { useEffect, useState } from "react";
-import { TextField, Box } from "@mui/material";
+import {
+  TextField,
+  Box,
+  MenuItem,
+  Select,
+  FormControl,
+  InputLabel,
+} from "@mui/material";
 import ModalWrapper from "@/components/ui/ModalWrapper";
 export default function AddCpuModal({
   open,
   onClose,
   isLoading,
   onSubmit,
-  data,
+  data = null,
 }) {
   if (!data) {
     return null;
@@ -18,8 +25,9 @@ export default function AddCpuModal({
     image: "",
     cores: "",
     threads: "",
-    architecture: "",
+    Architecture: "",
     cache: "",
+    socket: "",
     clock: "",
     cost: "",
   });
@@ -32,7 +40,7 @@ export default function AddCpuModal({
       image: data.image || "",
       cores: data.cores || "",
       threads: data.threads || "",
-      architecture: data.architecture || "",
+      Architecture: data.Achitecture || "",
       cache: data.cache || "",
       clock: data.clock || "",
       cost: data.cost || "",
@@ -82,6 +90,21 @@ export default function AddCpuModal({
             }
           />
         ))}
+
+        <FormControl fullWidth>
+          <InputLabel id="radiator-type-label">Socket</InputLabel>
+          <Select
+            labelId="radiator-type-label"
+            name="socket"
+            value={formData.socket}
+            onChange={handleChange}
+            label="Socket"
+          >
+            <MenuItem value="AM4">AM4</MenuItem>
+            <MenuItem value="LGA1200">LGA1200</MenuItem>
+            <MenuItem value="LGA1700">LGA1700</MenuItem>
+          </Select>
+        </FormControl>
       </Box>
     </ModalWrapper>
   );
