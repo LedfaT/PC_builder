@@ -55,12 +55,28 @@ export default function GPUPage() {
       const response = await GpuService.createGpu(newRow);
       setData((prev) => [...prev, newRow]);
 
-      if (response.stasus === 200) {
+      if (response.status === 200) {
         notify("added succsefully");
         toggleModal("add");
       }
     } catch (e) {
       notify(`${e.messaage}`, "error");
+    } finally {
+      toggleLoading();
+    }
+  };
+
+  const DeleteRow = async function (deleted) {
+    toggleLoading();
+    try {
+      const response = await GpuService.deleteGpu(deleted);
+
+      if (response.status === 200) {
+        setData((prev) => prev.filter((el) => el.id !== deleted));
+        notify("Deleted succsefully");
+      }
+    } catch (e) {
+      notify(`${e}`, "error");
     } finally {
       toggleLoading();
     }
@@ -87,7 +103,7 @@ export default function GPUPage() {
         return updatedData;
       });
 
-      if (response.stasus === 200) {
+      if (response.status === 200) {
         notify("edited succsefully");
         toggleModal("edit");
       }
@@ -125,6 +141,7 @@ export default function GPUPage() {
         setRowsPerPage={setLimit}
         data={data}
         onEdit={handleEdit}
+        onDelete={DeleteRow}
       />
       <AddGpuModal
         open={open.add}

@@ -54,7 +54,7 @@ export default function MotherboardPage() {
       const response = await MotherboardService.createMotherboard(newRow);
       setData((prev) => [...prev, newRow]);
 
-      if (response.stasus === 200) {
+      if (response.status === 200) {
         notify("added succsefully");
         toggleModal("add");
       }
@@ -102,7 +102,7 @@ export default function MotherboardPage() {
         return updatedData;
       });
 
-      if (response.stasus === 200) {
+      if (response.status === 200) {
         notify("edited succsefully");
         toggleModal("edit");
       }
@@ -140,6 +140,7 @@ export default function MotherboardPage() {
         setRowsPerPage={setLimit}
         data={data}
         onEdit={handleEdit}
+        onDelete={DeleteRow}
       />
       <AddMotherboardModal
         open={open.add}
