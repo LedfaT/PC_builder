@@ -110,7 +110,7 @@ export default function WaterCoolingPage() {
   };
   return (
     <div>
-      <h2>CPU List</h2>
+      <h2>Water coolings List</h2>
       <Button onClick={() => toggleModal("add")}>Add new Cpu</Button>
       <DataTable
         headers={headers}

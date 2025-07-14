@@ -1,8 +1,11 @@
 // src/pages/admin/CPUPage.jsx
-
-import React from "react";
+import { useEffect, useState } from "react";
 import DataTable from "../../../components/ui/table";
-
+import { Button } from "@mui/material";
+import AddFanCoolingModal from "../../../components/ui/Admin/Modals/fanCooling/AddFanCoolingModal";
+import notify from "@/components/notify";
+import EditFanCoolingModal from "../../../components/ui/Admin/Modals/fanCooling/EditFanCoolingModal";
+import CoolingSystemService from "@services/coolingSystem";
 export default function FanCoolingPage() {
   const headers = [
     "id",
@@ -14,46 +17,123 @@ export default function FanCoolingPage() {
     "cost",
   ];
 
-  const data = [
-    {
-      id: 1,
-      title: "Be Quiet! Pure Rock 2",
-      image: "https://example.com/images/pure-rock-2.jpg",
-      description:
-        "Тихий и мощный башенный кулер, оптимален для mid-range сборок.",
-      type_size: 1, // Башенный
-      heat_removal: "150W TDP",
-      cost: 40.0,
-    },
-    {
-      id: 2,
-      title: "Noctua NH-L9i",
-      image: "https://example.com/images/nh-l9i.jpg",
-      description:
-        "Низкопрофильный кулер, идеально подходит для mini-ITX систем.",
-      type_size: 2, // Низкопрофильный
-      heat_removal: "95W TDP",
-      cost: 50.0,
-    },
-    {
-      id: 3,
-      title: "Deepcool LS520",
-      image: "https://example.com/images/deepcool-ls520.jpg",
-      description: "Компактная водяная СЖО с RGB и высоким уровнем охлаждения.",
-      type_size: 3, // Водяное
-      heat_removal: "240W TDP",
-      cost: 120.0,
-    },
-  ];
+  const [data, setData] = useState([]);
+  const [page, setPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(1);
 
-  const handleEdit = (row) => {
-    console.log("Редактировать CPU:", row);
+  const [limit, setLimit] = useState(6);
+  const fetchData = async function () {
+    try {
+      const response = await CoolingSystemService.getAllCollingSystems(
+        page + 1,
+        limit
+      );
+      if (response.status === 200) {
+        console.log(response.data);
+        setData(response.data.data);
+        setTotalPages(response.data.meta.totalPages);
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
 
+  useEffect(() => {
+    fetchData();
+  }, [page, limit]);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const toggleLoading = function () {
+    setIsLoading((prev) => !prev);
+  };
+
+  const SubmitNew = async function (newRow) {
+    toggleLoading();
+    try {
+      const response = await CoolingSystemService.createCollingSystem(newRow);
+      setData((prev) => [...prev, newRow]);
+
+      if (response.stasus === 200) {
+        notify("added succsefully");
+        toggleModal("add");
+      }
+    } catch (e) {
+      notify(`${e.messaage}`, "error");
+    } finally {
+      toggleLoading();
+    }
+  };
+
+  const SubmitEdit = async function (editedComponent) {
+    toggleLoading();
+    try {
+      const { id, ...rest } = editedComponent;
+      const response = await CoolingSystemService.updateCollingSystem(id, rest);
+
+      setData((prevData) => {
+        const index = prevData.findIndex(
+          (component) => component.id === editedComponent.id
+        );
+        if (index === -1) return prevData;
+
+        const updatedData = [...prevData];
+        updatedData[index] = editedComponent;
+
+        return updatedData;
+      });
+
+      if (response.stasus === 200) {
+        notify("edited succsefully");
+        toggleModal("edit");
+      }
+    } catch (e) {
+      notify(`${e.message}`, "error");
+    } finally {
+      toggleLoading();
+    }
+  };
+
+  const [edititgRow, setEditingRow] = useState(null);
+  const handleEdit = (row) => {
+    setEditingRow(row);
+    toggleModal("edit");
+  };
+
+  const [open, setOpen] = useState({
+    add: false,
+    edit: false,
+  });
+
+  const toggleModal = function (modalType) {
+    setOpen((prev) => ({ ...prev, [modalType]: !prev[modalType] }));
+  };
   return (
     <div>
-      <h2>Water coolings List</h2>
-      <DataTable headers={headers} data={data} onEdit={handleEdit} />
+      <h2>Fan coolings List</h2>
+      <Button onClick={() => toggleModal("add")}>Add new Cpu</Button>
+      <DataTable
+        headers={headers}
+        page={page}
+        setPage={setPage}
+        totalPages={totalPages}
+        rowsPerPage={limit}
+        setRowsPerPage={setLimit}
+        data={data}
+        onEdit={handleEdit}
+      />
+      <AddFanCoolingModal
+        open={open.add}
+        isLoading={isLoading}
+        onSubmit={SubmitNew}
+        onClose={() => toggleModal("add")}
+      />
+      <EditFanCoolingModal
+        open={open.edit}
+        onClose={() => toggleModal("edit")}
+        data={edititgRow}
+        onSubmit={SubmitEdit}
+        isLoading={isLoading}
+      />
     </div>
   );
 }
