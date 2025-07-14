@@ -14,6 +14,9 @@ import {
 } from "@mui/material";
 import parseHeader from "@utils/parseHeader";
 import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ConfirmModal from "./ConfirmModal";
+import { use, useState } from "react";
 
 export default function DataTable({
   headers = [],
@@ -24,14 +27,18 @@ export default function DataTable({
   setRowsPerPage,
   data = [],
   onEdit,
+  onDelete,
 }) {
-  const paginatedData = data.slice(
-    page * rowsPerPage,
-    page * rowsPerPage + rowsPerPage
-  );
+  const [open, setOpen] = useState(false);
+  const [toDelete, setToDelete] = useState(0);
 
   return (
     <Paper>
+      <ConfirmModal
+        open={open}
+        onClose={() => setOpen(false)}
+        onSubmit={() => onDelete(toDelete)}
+      ></ConfirmModal>
       <TableContainer>
         <Table sx={{ minWidth: 650 }} aria-label="admin table">
           <TableHead>
@@ -66,6 +73,14 @@ export default function DataTable({
                 <TableCell align="right">
                   <IconButton onClick={() => onEdit(row)}>
                     <EditIcon />
+                  </IconButton>
+                  <IconButton
+                    onClick={() => {
+                      setToDelete(row.id);
+                      setOpen(true);
+                    }}
+                  >
+                    <DeleteIcon />
                   </IconButton>
                 </TableCell>
               </TableRow>

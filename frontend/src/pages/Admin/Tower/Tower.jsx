@@ -61,6 +61,22 @@ export default function SSDPage() {
     }
   };
 
+  const DeleteRow = async function (deleted) {
+    toggleLoading();
+    try {
+      const response = await TowerService.deleteTower(deleted);
+
+      if (response.stasus === 200) {
+        setData((prev) => prev.filter((el) => el.id !== deleted));
+        notify("Deleted succsefully");
+      }
+    } catch (e) {
+      notify(`${e}`, "error");
+    } finally {
+      toggleLoading();
+    }
+  };
+
   const SubmitEdit = async function (editedComponent) {
     toggleLoading();
     try {
@@ -117,6 +133,7 @@ export default function SSDPage() {
         setRowsPerPage={setLimit}
         data={data}
         onEdit={handleEdit}
+        onDelete={DeleteRow}
       />
       <AddTowerModal
         open={open.add}
