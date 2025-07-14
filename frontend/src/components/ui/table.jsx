@@ -12,6 +12,7 @@ import {
   Box,
   Button,
 } from "@mui/material";
+import parseHeader from "@utils/parseHeader";
 import EditIcon from "@mui/icons-material/Edit";
 
 export default function DataTable({
@@ -36,7 +37,7 @@ export default function DataTable({
           <TableHead>
             <TableRow>
               {headers.map((header) => (
-                <TableCell key={header}>{header}</TableCell>
+                <TableCell key={header}>{parseHeader(header)}</TableCell>
               ))}
               <TableCell align="right">Actions</TableCell>
             </TableRow>
