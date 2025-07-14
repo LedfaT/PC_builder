@@ -66,11 +66,7 @@ export default function AddSsdModal({ open, onClose, onSubmit, isLoading }) {
             onChange={handleChange}
             variant="outlined"
             fullWidth
-            type={
-              ["memory_quantity", "write_speed", "cost"].includes(key)
-                ? "number"
-                : "text"
-            }
+            type={["cost"].includes(key) ? "number" : "text"}
           />
         ))}
 
@@ -83,9 +79,8 @@ export default function AddSsdModal({ open, onClose, onSubmit, isLoading }) {
             onChange={handleChange}
             label="Radiator Type"
           >
-            <MenuItem value="passive">Passive</MenuItem>
-            <MenuItem value="active">Active</MenuItem>
-            <MenuItem value="none">None</MenuItem>
+            <MenuItem value="Aluminium">Aluminium</MenuItem>
+            <MenuItem value="Fan">Fan</MenuItem>
           </Select>
         </FormControl>
       </Box>
