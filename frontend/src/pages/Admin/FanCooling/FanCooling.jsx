@@ -53,7 +53,7 @@ export default function FanCoolingPage() {
       const response = await CoolingSystemService.createCollingSystem(newRow);
       setData((prev) => [...prev, newRow]);
 
-      if (response.stasus === 200) {
+      if (response.status === 200) {
         notify("added succsefully");
         toggleModal("add");
       }
@@ -98,7 +98,7 @@ export default function FanCoolingPage() {
         return updatedData;
       });
 
-      if (response.stasus === 200) {
+      if (response.status === 200) {
         notify("edited succsefully");
         toggleModal("edit");
       }
@@ -136,6 +136,7 @@ export default function FanCoolingPage() {
         setRowsPerPage={setLimit}
         data={data}
         onEdit={handleEdit}
+        onDelete={DeleteRow}
       />
       <AddFanCoolingModal
         open={open.add}
