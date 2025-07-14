@@ -1,8 +1,10 @@
-// src/pages/admin/CPUPage.jsx
-
-import React from "react";
+import { useEffect, useState } from "react";
 import DataTable from "../../../components/ui/table";
-
+import { Button } from "@mui/material";
+import AddRAMModal from "../../../components/ui/Admin/Modals/RAM/AddRAMModal";
+import notify from "@/components/notify";
+import EditRAMModal from "../../../components/ui/Admin/Modals/RAM/EditRAMModal";
+import RamService from "@services/ramService";
 export default function RAMPage() {
   const headers = [
     "id",
@@ -14,38 +16,120 @@ export default function RAMPage() {
     "radiator_type",
     "cost",
   ];
+  const [data, setData] = useState([]);
+  const [page, setPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(1);
 
-  const data = [
-    {
-      id: 1,
-      title: "Corsair Vengeance LPX 16GB",
-      description: "Надежная DDR4-память с низким профилем радиатора.",
-      image: "https://example.com/images/vengeance-lpx.jpg",
-      memory_quantity: "16GB",
-      memory_type: 4, // DDR4
-      radiator_type: 1, // алюминиевый
-      cost: 75.0,
-    },
-    {
-      id: 2,
-      title: "Kingston Fury Beast 32GB",
-      description: "Высокоскоростная DDR5 память с массивным радиатором.",
-      image: "https://example.com/images/fury-beast.jpg",
-      memory_quantity: "32GB",
-      memory_type: 5, // DDR5
-      radiator_type: 2, // медный
-      cost: 140.0,
-    },
-  ];
-
-  const handleEdit = (row) => {
-    console.log("Редактировать CPU:", row);
+  const [limit, setLimit] = useState(6);
+  const fetchData = async function () {
+    try {
+      const response = await RamService.getAllRams(page + 1, limit);
+      if (response.status === 200) {
+        console.log(response.data);
+        setData(response.data.data);
+        setTotalPages(response.data.meta.totalPages);
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
 
+  useEffect(() => {
+    fetchData();
+  }, [page, limit]);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const toggleLoading = function () {
+    setIsLoading((prev) => !prev);
+  };
+
+  const SubmitNew = async function (newRow) {
+    toggleLoading();
+    try {
+      const response = await RamService.createRam(newRow);
+      setData((prev) => [...prev, newRow]);
+
+      if (response.stasus === 200) {
+        notify("added succsefully");
+        toggleModal("add");
+      }
+    } catch (e) {
+      notify(`${e.messaage}`, "error");
+    } finally {
+      toggleLoading();
+    }
+  };
+
+  const SubmitEdit = async function (editedComponent) {
+    toggleLoading();
+    try {
+      const { id, ...rest } = editedComponent;
+      const response = await RamService.updateRam(id, rest);
+
+      setData((prevData) => {
+        const index = prevData.findIndex(
+          (component) => component.id === editedComponent.id
+        );
+        if (index === -1) return prevData;
+
+        const updatedData = [...prevData];
+        updatedData[index] = editedComponent;
+
+        return updatedData;
+      });
+
+      if (response.stasus === 200) {
+        notify("edited succsefully");
+        toggleModal("edit");
+      }
+    } catch (e) {
+      notify(`${e.message}`, "error");
+    } finally {
+      toggleLoading();
+    }
+  };
+
+  const [edititgRow, setEditingRow] = useState(null);
+  const handleEdit = (row) => {
+    setEditingRow(row);
+    toggleModal("edit");
+  };
+
+  const [open, setOpen] = useState({
+    add: false,
+    edit: false,
+  });
+
+  const toggleModal = function (modalType) {
+    setOpen((prev) => ({ ...prev, [modalType]: !prev[modalType] }));
+  };
   return (
     <div>
-      <h2>Water coolings List</h2>
-      <DataTable headers={headers} data={data} onEdit={handleEdit} />
+      <h2>RAM List</h2>
+      <Button onClick={() => toggleModal("add")}>Add new Cpu</Button>
+      <DataTable
+        headers={headers}
+        page={page}
+        setPage={setPage}
+        totalPages={totalPages}
+        rowsPerPage={limit}
+        setRowsPerPage={setLimit}
+        data={data}
+        onEdit={handleEdit}
+      />
+      <AddRAMModal
+        open={open.add}
+        isLoading={isLoading}
+        onSubmit={SubmitNew}
+        onClose={() => toggleModal("add")}
+      />
+      <EditRAMModal
+        open={open.edit}
+        onClose={() => toggleModal("edit")}
+        data={edititgRow}
+        onSubmit={SubmitEdit}
+        isLoading={isLoading}
+      />
     </div>
   );
 }

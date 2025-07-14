@@ -54,16 +54,7 @@ export default function EditMotherboardModal({
       submitText="Save"
     >
       <Box component="form" className="flex flex-col gap-2">
-        {[
-          "title",
-          "description",
-          "image",
-          "supported_memory_type",
-          "type_size",
-          "chipset",
-          "socket",
-          "cost",
-        ].map((key) => (
+        {["title", "description", "image", "chipset", "cost"].map((key) => (
           <TextField
             key={key}
             label={key[0].toUpperCase() + key.slice(1)}
@@ -75,6 +66,51 @@ export default function EditMotherboardModal({
             type={["cost"].includes(key) ? "number" : "text"}
           />
         ))}
+        <FormControl fullWidth>
+          <InputLabel id="radiator-type-label">Socket</InputLabel>
+          <Select
+            labelId="radiator-type-label"
+            name="socket"
+            value={formData.socket}
+            onChange={handleChange}
+            label="Socket"
+          >
+            <MenuItem value="AM4">AM4</MenuItem>
+            <MenuItem value="LGA1200">LGA1200</MenuItem>
+            <MenuItem value="LGA1700">LGA1700</MenuItem>
+          </Select>
+        </FormControl>
+
+        <FormControl fullWidth>
+          <InputLabel id="type-size-type-label">Type size</InputLabel>
+          <Select
+            labelId="type-size-type-label"
+            name="type_size"
+            value={formData.type_size}
+            onChange={handleChange}
+            label="Type size"
+          >
+            <MenuItem value="ATX">ATX</MenuItem>
+            <MenuItem value="MicroATX">MicroATX</MenuItem>
+            <MenuItem value="MiniITX">MiniITX</MenuItem>
+            <MenuItem value="None">None</MenuItem>
+          </Select>
+        </FormControl>
+
+        <FormControl fullWidth>
+          <InputLabel id="mem-type-label">Supported Memory Type</InputLabel>
+          <Select
+            labelId="mem-type-label"
+            name="supported_memory_type"
+            value={formData.supported_memory_type}
+            onChange={handleChange}
+            label="Supported Memory Type"
+          >
+            <MenuItem value="DDR3">DDR3</MenuItem>
+            <MenuItem value="DDR4">DDR4</MenuItem>
+            <MenuItem value="DDR5">DDR5</MenuItem>
+          </Select>
+        </FormControl>
       </Box>
     </ModalWrapper>
   );

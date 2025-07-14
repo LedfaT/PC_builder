@@ -100,7 +100,6 @@ export default function AddMotherboardModal({
             <MenuItem value="DDR3">DDR3</MenuItem>
             <MenuItem value="DDR4">DDR4</MenuItem>
             <MenuItem value="DDR5">DDR5</MenuItem>
-            <MenuItem value="None">None</MenuItem>
           </Select>
         </FormControl>
       </Box>
