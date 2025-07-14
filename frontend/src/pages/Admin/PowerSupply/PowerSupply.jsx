@@ -49,7 +49,7 @@ export default function PowerSupplyPage() {
       const response = await PowerSupplyService.create(newRow);
       setData((prev) => [...prev, newRow]);
 
-      if (response.stasus === 200) {
+      if (response.status === 200) {
         notify("added succsefully");
         toggleModal("add");
       }
@@ -94,7 +94,7 @@ export default function PowerSupplyPage() {
         return updatedData;
       });
 
-      if (response.stasus === 200) {
+      if (response.status === 200) {
         notify("edited succsefully");
         toggleModal("edit");
       }
