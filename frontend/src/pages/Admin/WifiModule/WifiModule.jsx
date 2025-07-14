@@ -55,6 +55,22 @@ export default function WifiModulePage() {
     }
   };
 
+  const DeleteRow = async function (deleted) {
+    toggleLoading();
+    try {
+      const response = await WifiModuleService.deleteWifiModule(deleted);
+
+      if (response.status === 200) {
+        setData((prev) => prev.filter((el) => el.id !== deleted));
+        notify("Deleted succsefully");
+      }
+    } catch (e) {
+      notify(`${e}`, "error");
+    } finally {
+      toggleLoading();
+    }
+  };
+
   const SubmitEdit = async function (editedComponent) {
     toggleLoading();
     try {
@@ -111,6 +127,7 @@ export default function WifiModulePage() {
         setRowsPerPage={setLimit}
         data={data}
         onEdit={handleEdit}
+        onDelete={DeleteRow}
       />
       <AddWifiModal
         open={open.add}

@@ -37,7 +37,10 @@ export default function DataTable({
       <ConfirmModal
         open={open}
         onClose={() => setOpen(false)}
-        onSubmit={() => onDelete(toDelete)}
+        onSubmit={() => {
+          onDelete(toDelete);
+          setOpen(false);
+        }}
       ></ConfirmModal>
       <TableContainer>
         <Table sx={{ minWidth: 650 }} aria-label="admin table">
