@@ -60,6 +60,22 @@ export default function PowerSupplyPage() {
     }
   };
 
+  const DeleteRow = async function (deleted) {
+    toggleLoading();
+    try {
+      const response = await PowerSupplyService.delete(deleted);
+
+      if (response.status === 200) {
+        setData((prev) => prev.filter((el) => el.id !== deleted));
+        notify("Deleted succsefully");
+      }
+    } catch (e) {
+      notify(`${e}`, "error");
+    } finally {
+      toggleLoading();
+    }
+  };
+
   const SubmitEdit = async function (editedComponent) {
     toggleLoading();
     try {
@@ -118,6 +134,7 @@ export default function PowerSupplyPage() {
         setRowsPerPage={setLimit}
         data={data}
         onEdit={handleEdit}
+        onDelete={DeleteRow}
       />
       <AddPowerSupplyModal
         open={open.add}
