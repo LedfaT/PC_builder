@@ -44,7 +44,7 @@ export default function WifiModulePage() {
       const response = await WifiModuleService.createWifiModule(newRow);
       setData((prev) => [...prev, newRow]);
 
-      if (response.stasus === 200) {
+      if (response.status === 200) {
         notify("added succsefully");
         toggleModal("add");
       }
@@ -89,7 +89,7 @@ export default function WifiModulePage() {
         return updatedData;
       });
 
-      if (response.stasus === 200) {
+      if (response.status === 200) {
         notify("edited succsefully");
         toggleModal("edit");
       }

@@ -50,7 +50,7 @@ export default function SSDPage() {
       const response = await TowerService.createTower(newRow);
       setData((prev) => [...prev, newRow]);
 
-      if (response.stasus === 200) {
+      if (response.status === 200) {
         notify("added succsefully");
         toggleModal("add");
       }
@@ -66,7 +66,7 @@ export default function SSDPage() {
     try {
       const response = await TowerService.deleteTower(deleted);
 
-      if (response.stasus === 200) {
+      if (response.status === 200) {
         setData((prev) => prev.filter((el) => el.id !== deleted));
         notify("Deleted succsefully");
       }
@@ -95,7 +95,7 @@ export default function SSDPage() {
         return updatedData;
       });
 
-      if (response.stasus === 200) {
+      if (response.status === 200) {
         notify("edited succsefully");
         toggleModal("edit");
       }

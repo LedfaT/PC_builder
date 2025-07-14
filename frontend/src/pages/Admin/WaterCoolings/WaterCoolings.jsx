@@ -54,12 +54,28 @@ export default function WaterCoolingPage() {
       const response = await WaterCoolingSystemService.createSystem(newRow);
       setData((prev) => [...prev, newRow]);
 
-      if (response.stasus === 200) {
+      if (response.status === 200) {
         notify("added succsefully");
         toggleModal("add");
       }
     } catch (e) {
       notify(`${e.messaage}`, "error");
+    } finally {
+      toggleLoading();
+    }
+  };
+
+  const DeleteRow = async function (deleted) {
+    toggleLoading();
+    try {
+      const response = await WaterCoolingSystemService.deleteSystem(deleted);
+
+      if (response.status === 200) {
+        setData((prev) => prev.filter((el) => el.id !== deleted));
+        notify("Deleted succsefully");
+      }
+    } catch (e) {
+      notify(`${e}`, "error");
     } finally {
       toggleLoading();
     }
@@ -83,7 +99,7 @@ export default function WaterCoolingPage() {
         return updatedData;
       });
 
-      if (response.stasus === 200) {
+      if (response.status === 200) {
         notify("edited succsefully");
         toggleModal("edit");
       }
@@ -121,6 +137,7 @@ export default function WaterCoolingPage() {
         setRowsPerPage={setLimit}
         data={data}
         onEdit={handleEdit}
+        onDelete={DeleteRow}
       />
       <AddWaterCoolingModal
         open={open.add}

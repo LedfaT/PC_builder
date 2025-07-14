@@ -52,12 +52,28 @@ export default function SSDPage() {
       const response = await SsdService.createSsd(newRow);
       setData((prev) => [...prev, newRow]);
 
-      if (response.stasus === 200) {
+      if (response.status === 200) {
         notify("added succsefully");
         toggleModal("add");
       }
     } catch (e) {
       notify(`${e.messaage}`, "error");
+    } finally {
+      toggleLoading();
+    }
+  };
+
+  const DeleteRow = async function (deleted) {
+    toggleLoading();
+    try {
+      const response = await SsdService.deleteSsd(deleted);
+
+      if (response.status === 200) {
+        setData((prev) => prev.filter((el) => el.id !== deleted));
+        notify("Deleted succsefully");
+      }
+    } catch (e) {
+      notify(`${e}`, "error");
     } finally {
       toggleLoading();
     }
@@ -81,7 +97,7 @@ export default function SSDPage() {
         return updatedData;
       });
 
-      if (response.stasus === 200) {
+      if (response.status === 200) {
         notify("edited succsefully");
         toggleModal("edit");
       }
@@ -119,6 +135,7 @@ export default function SSDPage() {
         setRowsPerPage={setLimit}
         data={data}
         onEdit={handleEdit}
+        onDelete={DeleteRow}
       />
       <AddSSDModal
         open={open.add}
