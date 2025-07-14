@@ -28,6 +28,7 @@ const routes = [
   { text: "Wifi module", to: "/admin/wifi-modules" },
   { text: "Bluetooth module", to: "/admin/Bluetooth-modules" },
   { text: "Power supply", to: "/admin/power-supplies" },
+  { text: "Tower", to: "/admin/tower" },
 ];
 
 export default function AdminLayout() {

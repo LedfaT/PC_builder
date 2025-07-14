@@ -23,6 +23,7 @@ import HDDPage from "./pages/Admin/Hdd/hdd.jsx";
 import WifiModulePage from "./pages/Admin/WifiModule/WifiModule.jsx";
 import BluetoothModulePage from "./pages/Admin/BluetoothModule/BluetoothModule.jsx";
 import PowerSupplyPage from "./pages/Admin/PowerSupply/PowerSupply.jsx";
+import TowerPage from "./pages/Admin/Tower/Tower.jsx";
 
 function App() {
   return (
@@ -56,6 +57,7 @@ function App() {
           <Route path="wifi-modules" element={<WifiModulePage />} />
           <Route path="Bluetooth-modules" element={<BluetoothModulePage />} />
           <Route path="power-supplies" element={<PowerSupplyPage />} />
+          <Route path="tower" element={<TowerPage />} />
         </Route>
         <Route path="*" element={<NotFound />} />
         <Route path="/forbidden" element={<Forbidden />} />
