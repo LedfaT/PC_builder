@@ -1,40 +1,130 @@
-// src/pages/admin/CPUPage.jsx
-
-import React from "react";
+import { useEffect, useState } from "react";
 import DataTable from "../../../components/ui/table";
-
+import { Button } from "@mui/material";
+import AddWifiModal from "../../../components/ui/Admin/Modals/wifi/AddWifiModal";
+import notify from "@/components/notify";
+import EditWifiModal from "../../../components/ui/Admin/Modals/wifi/EditWifiModal";
+import WifiModuleService from "@services/wifiModule";
 export default function WifiModulePage() {
   const headers = ["id", "title", "description", "image", "generation", "cost"];
 
-  const data = [
-    {
-      id: 1,
-      title: "Intel Wi-Fi 6 AX200",
-      description:
-        "Модуль беспроводной связи с поддержкой Wi-Fi 6 и Bluetooth 5.1.",
-      image: "https://example.com/images/intel-ax200.jpg",
-      generation: "Wi-Fi 6",
-      cost: 35.0,
-    },
-    {
-      id: 2,
-      title: "TP-Link UB500",
-      description: "Компактный Bluetooth адаптер пятого поколения.",
-      image: "https://example.com/images/ub500.jpg",
-      generation: "Bluetooth 5.0",
-      cost: 15.0,
-    },
-  ];
+  const [data, setData] = useState([]);
+  const [page, setPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(1);
 
-  const handleEdit = (row) => {
-    console.log("Редактировать CPU:", row);
-    // Здесь можно открыть модалку или перейти на /admin/cpus/:id/edit
+  const [limit, setLimit] = useState(6);
+  const fetchData = async function () {
+    try {
+      const response = await WifiModuleService.getAllWifiModules(
+        page + 1,
+        limit
+      );
+      if (response.status === 200) {
+        console.log(response.data);
+        setData(response.data.data);
+        setTotalPages(response.data.meta.totalPages);
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
 
+  useEffect(() => {
+    fetchData();
+  }, [page, limit]);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const toggleLoading = function () {
+    setIsLoading((prev) => !prev);
+  };
+
+  const SubmitNew = async function (newRow) {
+    toggleLoading();
+    try {
+      const response = await WifiModuleService.createWifiModule(newRow);
+      setData((prev) => [...prev, newRow]);
+
+      if (response.stasus === 200) {
+        notify("added succsefully");
+        toggleModal("add");
+      }
+    } catch (e) {
+      notify(`${e.messaage}`, "error");
+    } finally {
+      toggleLoading();
+    }
+  };
+
+  const SubmitEdit = async function (editedComponent) {
+    toggleLoading();
+    try {
+      const { id, ...rest } = editedComponent;
+      const response = await WifiModuleService.updateWifiModule(id, rest);
+
+      setData((prevData) => {
+        const index = prevData.findIndex(
+          (component) => component.id === editedComponent.id
+        );
+        if (index === -1) return prevData;
+
+        const updatedData = [...prevData];
+        updatedData[index] = editedComponent;
+
+        return updatedData;
+      });
+
+      if (response.stasus === 200) {
+        notify("edited succsefully");
+        toggleModal("edit");
+      }
+    } catch (e) {
+      notify(`${e.message}`, "error");
+    } finally {
+      toggleLoading();
+    }
+  };
+
+  const [edititgRow, setEditingRow] = useState(null);
+  const handleEdit = (row) => {
+    setEditingRow(row);
+    toggleModal("edit");
+  };
+
+  const [open, setOpen] = useState({
+    add: false,
+    edit: false,
+  });
+
+  const toggleModal = function (modalType) {
+    setOpen((prev) => ({ ...prev, [modalType]: !prev[modalType] }));
+  };
   return (
     <div>
-      <h2>CPU List</h2>
-      <DataTable headers={headers} data={data} onEdit={handleEdit} />
+      <h2>Wifi modules List</h2>
+      <Button onClick={() => toggleModal("add")}>Add new Cpu</Button>
+      <DataTable
+        headers={headers}
+        page={page}
+        setPage={setPage}
+        totalPages={totalPages}
+        rowsPerPage={limit}
+        setRowsPerPage={setLimit}
+        data={data}
+        onEdit={handleEdit}
+      />
+      <AddWifiModal
+        open={open.add}
+        isLoading={isLoading}
+        onSubmit={SubmitNew}
+        onClose={() => toggleModal("add")}
+      />
+      <EditWifiModal
+        open={open.edit}
+        onClose={() => toggleModal("edit")}
+        data={edititgRow}
+        onSubmit={SubmitEdit}
+        isLoading={isLoading}
+      />
     </div>
   );
 }

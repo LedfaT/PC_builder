@@ -10,7 +10,7 @@ export default class PowerSupplyCreate {
   image: string | null;
 
   constructor(powerSupply: PowerSupply) {
-    this.cost = powerSupply.cost;
+    this.cost = powerSupply.cost ? +powerSupply.cost : 0;
     this.strength = powerSupply.strength;
     this.title = powerSupply.title;
     this.sertificate = powerSupply.sertificate;
