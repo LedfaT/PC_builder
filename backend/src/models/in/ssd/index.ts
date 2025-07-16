@@ -11,7 +11,7 @@ export default class SsdCreate {
   image: string | null;
 
   constructor(ssd: SSD) {
-    this.cost = ssd.cost;
+    this.cost = ssd.cost ? +ssd.cost : 0;
     this.memory_quantity = ssd.memory_quantity;
     this.title = ssd.title;
     this.image = ssd.image;

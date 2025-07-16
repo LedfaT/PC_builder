@@ -9,7 +9,7 @@ export default class WaterCoolingSystemCreate {
   image: string | null;
 
   constructor(waterCoolingSystem: WaterCoolingSystem) {
-    this.cost = waterCoolingSystem.cost;
+    this.cost = waterCoolingSystem.cost ? +waterCoolingSystem.cost : 0;
     this.title = waterCoolingSystem.title;
     this.description = waterCoolingSystem.description;
     this.image = waterCoolingSystem.image;

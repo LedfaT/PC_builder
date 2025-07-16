@@ -7,7 +7,7 @@ export default class BluetoothModuleCreate {
   description: string | null;
   image: string | null;
   constructor(bluetooth: BluetoothModule) {
-    this.cost = bluetooth.cost;
+    this.cost = bluetooth.cost ? +bluetooth.cost : 0;
     this.generation = bluetooth.generation;
     this.image = bluetooth.image;
     this.description = bluetooth.description;

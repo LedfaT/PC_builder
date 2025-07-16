@@ -3,7 +3,7 @@ import {
   Computer as ComputerModel,
   Prisma,
 } from "@prisma/client";
-import ComputerOut from "../models/out/computer";
+import ComputerOut, { ComputerAllOut } from "../models/out/computer";
 import ApiError from "../exeptions/api-error";
 import { injectable } from "inversify";
 
@@ -39,7 +39,7 @@ class ComputerService {
     ]);
 
     const totalPages = Math.ceil(count / limit);
-    const data = computers.map((comp) => new ComputerOut(comp));
+    const data = computers.map((comp) => new ComputerAllOut(comp));
 
     return { meta: { count, totalPages }, data };
   }
@@ -121,7 +121,7 @@ class ComputerService {
         where,
         skip: offset,
         take: +limit,
-        include: this.defaultIncludesWithUser(),
+        include: this.defaultIncludes(),
       }),
     ]);
 

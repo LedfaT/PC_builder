@@ -29,7 +29,7 @@ export default class ComputerCreate {
     this.image = data.image;
     this.isPublished = data.isPublished;
     this.type = data.type;
-    this.cost = data.cost;
+    this.cost = data.cost ? +data.cost : 0;
     this.createdAt = data.createdAt;
 
     this.userId = data.userId;

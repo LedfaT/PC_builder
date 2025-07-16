@@ -7,50 +7,83 @@ import {
   TableRow,
   Paper,
   IconButton,
-  TablePagination,
+  TextField,
+  Typography,
+  Box,
+  Button,
 } from "@mui/material";
+import parseHeader from "@utils/parseHeader";
 import EditIcon from "@mui/icons-material/Edit";
-import { useState } from "react";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ConfirmModal from "./ConfirmModal";
+import { use, useState } from "react";
 
-export default function DataTable({ headers = [], data = [], onEdit }) {
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
-
-  const paginatedData = data.slice(
-    page * rowsPerPage,
-    page * rowsPerPage + rowsPerPage
-  );
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
+export default function DataTable({
+  headers = [],
+  page,
+  setPage,
+  totalPages,
+  rowsPerPage,
+  setRowsPerPage,
+  data = [],
+  onEdit,
+  onDelete,
+}) {
+  const [open, setOpen] = useState(false);
+  const [toDelete, setToDelete] = useState(0);
 
   return (
     <Paper>
+      <ConfirmModal
+        open={open}
+        onClose={() => setOpen(false)}
+        onSubmit={() => {
+          onDelete(toDelete);
+          setOpen(false);
+        }}
+      ></ConfirmModal>
       <TableContainer>
         <Table sx={{ minWidth: 650 }} aria-label="admin table">
           <TableHead>
             <TableRow>
               {headers.map((header) => (
-                <TableCell key={header}>{header}</TableCell>
+                <TableCell key={header}>{parseHeader(header)}</TableCell>
               ))}
               <TableCell align="right">Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {paginatedData.map((row) => (
+            {data.map((row) => (
               <TableRow key={row.id}>
                 {headers.map((headerKey) => (
-                  <TableCell key={headerKey}>{row[headerKey]}</TableCell>
+                  <TableCell key={headerKey}>
+                    {headerKey === "image" &&
+                    typeof row[headerKey] === "string" ? (
+                      <img
+                        src={row[headerKey]}
+                        alt="preview"
+                        style={{
+                          width: 64,
+                          height: 64,
+                          borderRadius: 4,
+                        }}
+                      />
+                    ) : (
+                      row[headerKey]
+                    )}
+                  </TableCell>
                 ))}
                 <TableCell align="right">
                   <IconButton onClick={() => onEdit(row)}>
                     <EditIcon />
+                  </IconButton>
+                  <IconButton
+                    onClick={() => {
+                      setToDelete(row.id);
+                      setOpen(true);
+                    }}
+                  >
+                    <DeleteIcon />
                   </IconButton>
                 </TableCell>
               </TableRow>
@@ -59,15 +92,57 @@ export default function DataTable({ headers = [], data = [], onEdit }) {
         </Table>
       </TableContainer>
 
-      <TablePagination
-        component="div"
-        count={data.length}
-        page={page}
-        onPageChange={handleChangePage}
-        rowsPerPage={rowsPerPage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-        rowsPerPageOptions={[5, 10, 25, 50]}
-      />
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        p={2}
+        flexWrap="wrap"
+        gap={2}
+      >
+        <Box display="flex" alignItems="center" gap={2}>
+          <Typography>Mount on page:</Typography>
+          <TextField
+            type="number"
+            inputProps={{ min: 1 }}
+            value={rowsPerPage}
+            onChange={(e) => {
+              const value = parseInt(e.target.value, 10);
+              if (isNaN(value)) return;
+
+              if (value <= 0) {
+                setRowsPerPage(1);
+              } else {
+                setRowsPerPage(value);
+              }
+            }}
+            size="small"
+            sx={{ width: 80 }}
+          />
+        </Box>
+
+        <Box display="flex" alignItems="center" gap={2}>
+          <Button
+            variant="outlined"
+            onClick={() => setPage((p) => p - 1)}
+            disabled={page <= 0}
+          >
+            ← previous
+          </Button>
+
+          <Typography>
+            Page {page + 1} from {totalPages || 1}
+          </Typography>
+
+          <Button
+            variant="outlined"
+            onClick={() => setPage((p) => p + 1)}
+            disabled={page + 1 >= totalPages}
+          >
+            Next →
+          </Button>
+        </Box>
+      </Box>
     </Paper>
   );
 }

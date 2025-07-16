@@ -12,7 +12,8 @@ export default class CpuCreate {
   image: string | null;
   socket: SocketType;
   constructor(cpu: CPU) {
-    this.cost = cpu.cost;
+    this.cost =
+      typeof cpu.cost === "string" ? parseFloat(cpu.cost) : cpu.cost ?? 0;
     this.cores = cpu.cores;
     this.title = cpu.title;
     this.image = cpu.image;

@@ -7,7 +7,7 @@ export default class WifiModuleCreate {
   cost: number | null;
 
   constructor(wifi: WifiModule) {
-    this.cost = wifi.cost;
+    this.cost = wifi.cost ? +wifi.cost : 0;
     this.image = wifi.image;
     this.description = wifi.description;
     this.generation = wifi.generation;

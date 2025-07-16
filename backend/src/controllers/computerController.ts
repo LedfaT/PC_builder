@@ -26,7 +26,7 @@ export default class ComputerController {
     next: NextFunction
   ) => {
     try {
-      const userId = (req.user as any).id; // Лучше сделать кастомный интерфейс
+      const userId = (req.user as any).id;
       const computers = await this.computerService.getAllUserComputers(
         userId,
         req.query
@@ -94,8 +94,9 @@ export default class ComputerController {
 
   createComputer = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const userId = (req.user as any).id;
-      const computerData = { ...req.body, user_id: userId };
+      if (!req.user) return;
+      const userId = req.user.id;
+      const computerData = { ...req.body, user: { connect: { id: userId } } };
       await this.computerService.create(computerData);
       res.json({ message: "Computer created successfully" });
     } catch (error) {

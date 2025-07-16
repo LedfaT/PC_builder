@@ -10,7 +10,7 @@ export default class HddCreate {
   image: string | null;
 
   constructor(hdd: HDD) {
-    this.cost = hdd.cost;
+    this.cost = hdd.cost ? +hdd.cost : 0;
     this.memory_quantity = hdd.memory_quantity;
     this.title = hdd.title;
     this.image = hdd.image;
