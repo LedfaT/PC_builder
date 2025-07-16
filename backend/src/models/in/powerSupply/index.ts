@@ -1,5 +1,4 @@
 import { PowerSupply } from "@prisma/client";
-import { type } from "os";
 
 export default class PowerSupplyCreate {
   title: string;
@@ -10,13 +9,12 @@ export default class PowerSupplyCreate {
   image: string | null;
 
   constructor(powerSupply: PowerSupply) {
-    this.cost = powerSupply.cost;
-    this.strength = powerSupply.strength;
+    this.cost = powerSupply.cost ? +powerSupply.cost : 0;
+    this.strength = powerSupply.strength ? +powerSupply.strength : 0;
     this.title = powerSupply.title;
     this.sertificate = powerSupply.sertificate;
     this.image = powerSupply.image;
     this.description = powerSupply.description;
-    this.cost = powerSupply.cost;
   }
 }
 

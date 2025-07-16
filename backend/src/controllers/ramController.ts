@@ -12,11 +12,11 @@ export class RamController {
     private readonly ramService: RamService
   ) {}
 
-  async createRam(
+  createRam = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const newRam = new RamCreate(req.body);
       await this.ramService.create(newRam);
@@ -24,9 +24,13 @@ export class RamController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async getRam(req: Request, res: Response, next: NextFunction): Promise<void> {
+  getRam = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
     try {
       const { id } = req.params;
       const ram = await this.ramService.getRamById(+id);
@@ -34,13 +38,13 @@ export class RamController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async updateRam(
+  updateRam = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const { id } = req.params;
       const updateData: TRamUpdate = req.body;
@@ -49,13 +53,13 @@ export class RamController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async deleteRam(
+  deleteRam = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const { id } = req.params;
       await this.ramService.delete(+id);
@@ -63,18 +67,18 @@ export class RamController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async getAllRams(
+  getAllRams = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const rams = await this.ramService.getAllRams(req.query);
       res.json(rams);
     } catch (e) {
       next(e);
     }
-  }
+  };
 }

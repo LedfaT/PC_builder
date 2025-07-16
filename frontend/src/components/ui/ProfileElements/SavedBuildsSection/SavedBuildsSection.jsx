@@ -11,19 +11,19 @@ const SavedBuildsSection = () => {
     // Собираем компоненты
     const components = [];
 
-    if (computerData.bluetooth_module) {
+    if (computerData.bluetoothModule) {
       components.push({
         type: "BluetoothModule",
-        name: computerData.bluetooth_module.title,
-        price: `$${computerData.bluetooth_module.cost.toFixed(2)}`,
+        name: computerData.bluetoothModule.title,
+        price: `$${computerData.bluetoothModule.cost.toFixed(2)}`,
       });
     }
 
-    if (computerData.cooling_system) {
+    if (computerData.coolingSystem) {
       components.push({
         type: "Cooling System",
-        name: computerData.cooling_system.title,
-        price: `$${computerData.cooling_system.cost.toFixed(2)}`,
+        name: computerData.coolingSystem.title,
+        price: `$${computerData.coolingSystem.cost.toFixed(2)}`,
       });
     }
 
@@ -43,11 +43,11 @@ const SavedBuildsSection = () => {
       });
     }
 
-    if (computerData.wifi_module) {
+    if (computerData.wifiModule) {
       components.push({
         type: "Wifi",
-        name: computerData.wifi_module.title,
-        price: `$${computerData.wifi_module.cost.toFixed(2)}`,
+        name: computerData.wifiModule.title,
+        price: `$${computerData.wifiModule.cost.toFixed(2)}`,
       });
     }
 
@@ -59,11 +59,11 @@ const SavedBuildsSection = () => {
       });
     }
 
-    if (computerData.power_supply) {
+    if (computerData.powersupply) {
       components.push({
         type: "Power Supply",
-        name: computerData.power_supply.title,
-        price: `$${computerData.power_supply.cost.toFixed(2)}`,
+        name: computerData.powersupply.title,
+        price: `$${computerData.powersupply.cost.toFixed(2)}`,
       });
     }
 
@@ -83,11 +83,11 @@ const SavedBuildsSection = () => {
       });
     }
 
-    if (computerData.water_cooling_system) {
+    if (computerData.waterCoolingSystem) {
       components.push({
         type: "Water cooling system",
-        name: computerData.water_cooling_system.title,
-        price: `$${computerData.water_cooling_system.cost.toFixed(2)}`,
+        name: computerData.waterCoolingSystem.title,
+        price: `$${computerData.waterCoolingSystem.cost.toFixed(2)}`,
       });
     }
 
@@ -115,7 +115,7 @@ const SavedBuildsSection = () => {
 
   const fetchUserBuilds = async function () {
     try {
-      const res = await computerService.getAllUserComputers();
+      const res = await computerService.getAllUserComputers(1, 4);
 
       if (res.status === 200) {
         const transformed = res.data.data.map(transformBuildData);

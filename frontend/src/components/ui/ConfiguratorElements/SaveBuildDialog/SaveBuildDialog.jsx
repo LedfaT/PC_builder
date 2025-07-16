@@ -40,21 +40,25 @@ const SaveBuildDialog = ({ open, onClose, build, totalPrice }) => {
   };
 
   const parseBuild = function () {
-    console.log(totalPrice);
-    return {
-      bluetooth_module_id: build.Bluetooth.id,
-      tower_id: build.Case.id,
-      cooling_system_id: build.FCS.id,
-      cpu_id: build.CPU.id,
-      gpu_id: build.GPU.id,
-      hdd_id: build.HDD.id,
-      motherboard_id: build.Motherboard.id,
-      power_supply_id: build["Power Supply"].id,
-      ram_id: build.RAM.id,
-      ssd_id: build.SSD.id,
-      water_cooling_system_id: build.WCS.id,
-      wifi_module_id: build.Wifi.id,
+    const result = {
+      cpu: { connect: { id: build.CPU.id } },
+      gpu: { connect: { id: build.GPU.id } },
+      ram: { connect: { id: build.RAM.id } },
+      motherboard: { connect: { id: build.Motherboard.id } },
+      powersupply: { connect: { id: build["Power Supply"].id } },
+      tower: { connect: { id: build.Case.id } },
+      wifiModule: { connect: { id: build.Wifi.id } },
     };
+
+    if (build.SSD) result.ssd = { connect: { id: build.SSD.id } };
+    if (build.HDD) result.hdd = { connect: { id: build.HDD.id } };
+    if (build.WCS)
+      result.waterCoolingSystem = { connect: { id: build.WCS.id } };
+    if (build.FCS) result.coolingSystem = { connect: { id: build.FCS.id } };
+    if (build.Bluetooth)
+      result.bluetoothModule = { connect: { id: build.Bluetooth.id } };
+
+    return result;
   };
 
   const handleSave = async () => {

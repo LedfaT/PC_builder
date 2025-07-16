@@ -289,7 +289,7 @@ const componentsData = {
           'Type': 'DDR5',
           'Speed': '6000MHz',
           'Timings': '36-36-36-96',
-'Voltage': '1.35V',
+          'Voltage': '1.35V',
           'ECC': 'No',
           'RGB': 'Yes'
         },
@@ -439,7 +439,7 @@ const componentsData = {
           'Type': 'Mid Tower',
           'Motherboard Support': 'E-ATX, ATX, Micro-ATX, Mini-ITX',
           'Expansion Slots': 8,
-'Drive Bays': '3x 2.5", 2x 3.5"',
+          'Drive Bays': '3x 2.5", 2x 3.5"',
           'Front I/O': '2x USB 3.0, 1x USB-C, Audio',
           'Max GPU Length': '420mm',
           'Max CPU Cooler Height': '155mm'
@@ -573,7 +573,7 @@ const componentsData = {
           'Fan': '135mm Fluid Dynamic Bearing'
         },
         features: [
-'ECO mode for silent operation',
+          'ECO mode for silent operation',
           '100% Japanese capacitors',
           'High power density',
           '10-year warranty'
@@ -715,7 +715,7 @@ const componentsData = {
         rating: 4.7,
         description: 'Performance hard drive for gaming and creative applications...',
         specs: {
-'Capacity': '6TB',
+          'Capacity': '6TB',
           'Form Factor': '3.5"',
           'Interface': 'SATA 6Gb/s',
           'RPM': 7200,
@@ -853,7 +853,7 @@ const componentsData = {
         },
         features: [
           'Pressure-optimized for radiators',
-'PST (PWM Sharing Technology)',
+          'PST (PWM Sharing Technology)',
           'Low noise motor',
           '6-year warranty'
         ]

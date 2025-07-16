@@ -12,11 +12,11 @@ export class PowerSupplyController {
     private readonly powerSupplyService: PowerSupplyService
   ) {}
 
-  async createPowerSupply(
+  createPowerSupply = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const newPowerSupply = new PowerSupplyCreate(req.body);
       await this.powerSupplyService.create(newPowerSupply);
@@ -24,13 +24,13 @@ export class PowerSupplyController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async getPowerSupply(
+  getPowerSupply = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const { id } = req.params;
       const powerSupply = await this.powerSupplyService.getPowerSupplyById(+id);
@@ -38,13 +38,13 @@ export class PowerSupplyController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async updatePowerSupply(
+  updatePowerSupply = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const { id } = req.params;
       const updateData: TPowerSupplyUpdate = req.body;
@@ -53,13 +53,13 @@ export class PowerSupplyController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async deletePowerSupply(
+  deletePowerSupply = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const { id } = req.params;
       await this.powerSupplyService.delete(+id);
@@ -67,13 +67,13 @@ export class PowerSupplyController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async getAllPowerSupplies(
+  getAllPowerSupplies = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const powerSupplies = await this.powerSupplyService.getAllPowerSupplies(
         req.query
@@ -82,5 +82,5 @@ export class PowerSupplyController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 }

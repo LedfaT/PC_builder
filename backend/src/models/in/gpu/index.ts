@@ -3,7 +3,7 @@ import { GPU } from "@prisma/client";
 export default class GpuCreate {
   title: string;
   cores: string;
-  cost: number | null;
+  cost: number;
   threads: string;
   vram_quantity: string;
   cache: string;
@@ -13,7 +13,7 @@ export default class GpuCreate {
   image: string | null;
 
   constructor(gpu: GPU) {
-    this.cost = gpu.cost;
+    this.cost = gpu.cost ? +gpu.cost : 0;
     this.cores = gpu.cores;
     this.title = gpu.title;
     this.description = gpu.description;

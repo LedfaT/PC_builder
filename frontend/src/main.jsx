@@ -1,10 +1,15 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
+// src/index.js або src/main.js
 
-createRoot(document.getElementById('root')).render(
+import React, { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App";
+import ContextProvider from "./contextProvider";
+import "./app.css";
+
+createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <App />
-  </StrictMode>,
-)
+    <ContextProvider>
+      <App />
+    </ContextProvider>
+  </StrictMode>
+);

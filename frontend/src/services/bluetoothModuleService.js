@@ -7,7 +7,7 @@ export default class BluetoothModuleService {
 
   static async getAllBluetoothModules(page, limit, search = "") {
     return $api.get(
-      /api/bluetooth-module/list?page=${page}&limit=${limit}&search=${search}
+      `/api/bluetooth-module/list?page=${page}&limit=${limit}&search=${search}`
     );
   }
 

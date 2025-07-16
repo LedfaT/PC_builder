@@ -10,7 +10,7 @@ export default class TowerCreate {
   image: string | null;
 
   constructor(tower: Tower) {
-    this.cost = tower.cost;
+    this.cost = tower.cost ? +tower.cost : 0;
     this.fan_included = tower.fan_included;
     this.title = tower.title;
     this.image = tower.image;

@@ -14,6 +14,7 @@ import {
   bluetoothDependencyTypes,
   wifiDependencyTypes,
   hddDependencyTypes,
+  computerDependencyTypes,
 } from "@ownTypes/dependencyTypes";
 import { AuthService } from "@services/authService";
 import { AuthController } from "@controllers/authController";
@@ -43,6 +44,8 @@ import WifiModuleService from "@services/wifiService";
 import { WifiController } from "@controllers/wifiController";
 import { HddController } from "@controllers/hddControlller";
 import HddService from "@services/hddService";
+import ComputerService from "@services/computerService";
+import ComputerController from "@controllers/computerController";
 
 const container = new Container();
 
@@ -103,5 +106,10 @@ container
 
 container.bind(towerDependencyTypes.TowerService).to(TowerService);
 container.bind(towerDependencyTypes.TowerController).to(TowerController);
+
+container.bind(computerDependencyTypes.ComputerService).to(ComputerService);
+container
+  .bind(computerDependencyTypes.ComputerController)
+  .to(ComputerController);
 
 export { container };
