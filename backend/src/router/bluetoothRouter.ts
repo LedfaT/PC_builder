@@ -1,6 +1,7 @@
 import { container } from "@config/container";
 import { BluetoothModuleController } from "@controllers/buetoothController";
 import { bluetoothDependencyTypes } from "@ownTypes/dependencyTypes";
+
 import { Router } from "express";
 
 const bluetoothRouter = Router();

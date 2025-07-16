@@ -8,12 +8,17 @@ import { Context } from "@/contextProvider";
 const Profile = () => {
   const { store } = useContext(Context);
   const auth = store.getData().isAuth;
+  const isActivated = store.getData().user.isActicated;
   const navigate = useNavigate();
   useEffect(() => {
     if (!auth) {
       navigate("/signin");
       return;
     }
+    // if (!isActivated) {
+    //   navigate("/signin");
+    //   return;
+    // }
   }, []);
   return (
     <div className={profilePageStyles.profilePage}>

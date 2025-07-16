@@ -61,7 +61,7 @@ export class AuthService {
 
     await this.mailService.sendActivationMail(
       email,
-      `${process.env.API_URL}/api/activate/${activationLink}`
+      `${process.env.API_URL}/api/auth/activate/${activationLink}`
     );
 
     return this._generateUserPayload(newUser);

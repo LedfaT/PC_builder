@@ -25,6 +25,7 @@ import BluetoothModulePage from "./pages/Admin/BluetoothModule/BluetoothModule.j
 import PowerSupplyPage from "./pages/Admin/PowerSupply/PowerSupply.jsx";
 import TowerPage from "./pages/Admin/Tower/Tower.jsx";
 import DashboardPage from "./pages/Admin/Dashboard/DashboardPage.jsx";
+import Unauthorized from "./pages/Exceptions/Unauthorized.jsx";
 
 function App() {
   return (
@@ -63,6 +64,7 @@ function App() {
         </Route>
         <Route path="*" element={<NotFound />} />
         <Route path="/forbidden" element={<Forbidden />} />
+        <Route path="/unauthorized" element={<Unauthorized />} />
       </Routes>
     </Router>
   );
