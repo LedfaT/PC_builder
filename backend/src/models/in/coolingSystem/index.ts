@@ -9,7 +9,7 @@ export default class CoolingSystemCreate {
   description: string | null;
   image: string | null;
   constructor(CoolingSystem: CoolingSystem) {
-    this.cost = CoolingSystem.cost;
+    this.cost = CoolingSystem.cost ? +CoolingSystem.cost : 0;
     this.heat_removal = CoolingSystem.heat_removal;
     this.image = CoolingSystem.image;
     this.description = CoolingSystem.description;

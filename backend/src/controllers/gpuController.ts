@@ -12,11 +12,11 @@ export class GpuController {
     private readonly gpuService: GpuService
   ) {}
 
-  async createGpu(
+  createGpu = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const newGpu = new GpuCreate(req.body);
       await this.gpuService.create(newGpu);
@@ -24,9 +24,13 @@ export class GpuController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async getGpu(req: Request, res: Response, next: NextFunction): Promise<void> {
+  getGpu = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
     try {
       const { id } = req.params;
       const gpu = await this.gpuService.getGpuById(+id);
@@ -34,13 +38,13 @@ export class GpuController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async updateGpu(
+  updateGpu = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const { id } = req.params;
       const updateData: TGpuUpdate = req.body;
@@ -49,13 +53,13 @@ export class GpuController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async deleteGpu(
+  deleteGpu = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const { id } = req.params;
       await this.gpuService.delete(+id);
@@ -63,18 +67,18 @@ export class GpuController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async getAllGpus(
+  getAllGpus = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const gpus = await this.gpuService.getAllGpus(req.query);
       res.json(gpus);
     } catch (e) {
       next(e);
     }
-  }
+  };
 }

@@ -12,11 +12,11 @@ export class WifiController {
     private readonly wifiService: WifiService
   ) {}
 
-  async createWifi(
+  createWifi = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const newWifi = new WifiCreate(req.body);
       await this.wifiService.create(newWifi);
@@ -24,13 +24,13 @@ export class WifiController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async getWifi(
+  getWifi = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const { id } = req.params;
       const wifi = await this.wifiService.getWifiModuleById(+id);
@@ -38,13 +38,13 @@ export class WifiController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async updateWifi(
+  updateWifi = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const { id } = req.params;
       const updateData: TWifiModuleUpdate = req.body;
@@ -53,13 +53,13 @@ export class WifiController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async deleteWifi(
+  deleteWifi = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const { id } = req.params;
       await this.wifiService.delete(+id);
@@ -67,18 +67,18 @@ export class WifiController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async getAllWifis(
+  getAllWifis = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const wifis = await this.wifiService.getAllWifiModules(req.query);
       res.json(wifis);
     } catch (e) {
       next(e);
     }
-  }
+  };
 }

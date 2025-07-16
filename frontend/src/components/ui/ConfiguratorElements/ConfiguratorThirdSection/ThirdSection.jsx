@@ -30,10 +30,11 @@ const ConfiguratorThirdSection = ({ build, totalPrice, selectedCount }) => {
   const [successDialogOpen, setSuccessDialogOpen] = useState(false);
 
   const handleSaveClick = () => {
-    if (selectedCount === partsOrder.length) {
+    if (selectedCount === 10) {
       setSaveDialogOpen(true);
     } else {
-      notify("Add at least 8 components", "warning");
+      console.log(selectedCount);
+      notify("Add all needed components", "warning");
     }
   };
 

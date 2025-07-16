@@ -10,7 +10,7 @@ export default class RamCreate {
   image: string | null;
 
   constructor(ram: RAM) {
-    this.cost = ram.cost;
+    this.cost = ram.cost ? +ram.cost : 0;
     this.memory_quantity = ram.memory_quantity;
     this.title = ram.title;
     this.image = ram.image;

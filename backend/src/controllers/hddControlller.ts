@@ -12,11 +12,11 @@ export class HddController {
     private readonly hddService: HddService
   ) {}
 
-  async createHdd(
+  createHdd = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const newHdd = new HddCreate(req.body);
       await this.hddService.create(newHdd);
@@ -24,9 +24,13 @@ export class HddController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async getHdd(req: Request, res: Response, next: NextFunction): Promise<void> {
+  getHdd = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
     try {
       const { id } = req.params;
       const hdd = await this.hddService.getHddById(+id);
@@ -34,13 +38,13 @@ export class HddController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async updateHdd(
+  updateHdd = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const { id } = req.params;
       const updateData: THddUpate = req.body;
@@ -49,13 +53,13 @@ export class HddController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async deleteHdd(
+  deleteHdd = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const { id } = req.params;
       await this.hddService.delete(+id);
@@ -63,18 +67,18 @@ export class HddController {
     } catch (e) {
       next(e);
     }
-  }
+  };
 
-  async getAllHdds(
+  getAllHdds = async (
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<void> {
+  ): Promise<void> => {
     try {
       const hdds = await this.hddService.getAllHdds(req.query);
       res.json(hdds);
     } catch (e) {
       next(e);
     }
-  }
+  };
 }

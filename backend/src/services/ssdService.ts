@@ -46,7 +46,7 @@ class SsdService {
       client.sSD.findMany({
         where,
         skip,
-        take: limit,
+        take: +limit,
         orderBy: { id: "asc" },
       }),
     ]);

@@ -27,6 +27,9 @@ model User {
     createdAt DateTime? @default(now())
     updatedAt DateTime? @updatedAt
 
+    computers   Computer[]
+
+
     @@map("user")
 }
 
@@ -59,10 +62,13 @@ model CPU {
     cores String
     threads String
     Architecture String
+    socket SocketType
     cache String
     clock String
     createdAt DateTime? @default(now())
     updatedAt DateTime? @updatedAt
+
+    computers   Computer[]
 
     @@map("cpu")
 }
@@ -84,6 +90,8 @@ model GPU {
   createdAt   DateTime? @default(now())
   updatedAt   DateTime? @updatedAt
 
+  computers   Computer[]
+
   @@map("gpu")
 }
 //////////// GPU table ///////////
@@ -101,6 +109,8 @@ model HDD {
   createdAt   DateTime? @default(now())
   updatedAt   DateTime? @updatedAt
 
+computers   Computer[]
+
   @@map("hdd")
 }
 //////////// HDD table ///////////
@@ -117,6 +127,8 @@ model RAM {
   cost            Float?
   createdAt   DateTime? @default(now())
   updatedAt   DateTime? @updatedAt
+
+  computers   Computer[]
   @@map("ram")
 }
 
@@ -143,11 +155,13 @@ model Motherboard {
   image       String? @db.Text
   chipset     String
   type_size   TypeSize
-  socket      String
+  socket      SocketType
+  supported_memory_type MemoryType
   cost        Float?
   createdAt   DateTime? @default(now())
   updatedAt   DateTime? @updatedAt
 
+  computers   Computer[]
 
   @@map("motherboard")
 }
@@ -172,6 +186,8 @@ model PowerSupply {
   createdAt   DateTime? @default(now())
   updatedAt   DateTime? @updatedAt
 
+  computers   Computer[]
+
   @@map("power_supply")
 }
 //////////// PowerSupply table ///////////
@@ -188,6 +204,8 @@ model Tower {
   cost         Float?
   createdAt   DateTime? @default(now())
   updatedAt   DateTime? @updatedAt
+
+  computers   Computer[]
 
   @@map("tower")
 }
@@ -217,6 +235,8 @@ model WifiModule {
   createdAt   DateTime? @default(now())
   updatedAt   DateTime? @updatedAt
 
+  computers   Computer[]
+
   @@map("wifi_module") 
 }
 //////////// Wifi Module table ///////////
@@ -234,6 +254,8 @@ model SSD {
   cost            Float?
   createdAt   DateTime? @default(now())
   updatedAt   DateTime? @updatedAt
+
+  computers   Computer[]
 
   @@map("ssd") 
 }
@@ -256,6 +278,8 @@ model BluetoothModule {
   createdAt   DateTime? @default(now())
   updatedAt   DateTime? @updatedAt
 
+  computers   Computer[]
+
   @@map("bluetooth_module")
 } 
 //////////// Bluetooth module table ///////////
@@ -271,6 +295,8 @@ model CoolingSystem {
   cost         Float?
   createdAt   DateTime? @default(now())
   updatedAt   DateTime? @updatedAt
+
+  computers   Computer[]
 
   @@map("cooling_system")
 }
@@ -294,6 +320,8 @@ model WaterCoolingSystem {
   createdAt   DateTime? @default(now())
   updatedAt   DateTime? @updatedAt
 
+  computers   Computer[]
+
   @@map("water_cooling_system")
 }
 
@@ -303,3 +331,63 @@ enum TypeSizeWaterCoolingSystem {
   mm240
 }
 //////////// Water cooling system table ///////////
+
+model Computer {
+  id              Int       @id @default(autoincrement())
+  title           String
+  description     String?   @db.Text
+  image           String?   @db.Text
+  isPublished     Boolean @default(false)
+  type            String
+  cost            Float?
+  createdAt       DateTime? @default(now())
+  updatedAt       DateTime? @updatedAt
+
+  userId          Int?
+  user            User?     @relation(fields: [userId], references: [id])
+
+
+  cpuId           Int? 
+  cpu             CPU?             @relation(fields: [cpuId], references: [id])
+
+  gpuId           Int?
+  gpu             GPU?             @relation(fields: [gpuId], references: [id])
+
+  ramId           Int?
+  ram             RAM?             @relation(fields: [ramId], references: [id])
+
+  motherboardId   Int?
+  motherboard     Motherboard?     @relation(fields: [motherboardId], references: [id])
+
+  powersupplyId   Int?
+  powersupply     PowerSupply?     @relation(fields: [powersupplyId], references: [id])
+
+  towerId         Int?
+  tower           Tower?           @relation(fields: [towerId], references: [id])
+
+  wifiModuleId    Int?
+  wifiModule      WifiModule?      @relation(fields: [wifiModuleId], references: [id])
+
+  bluetoothModuleId Int?
+  bluetoothModule   BluetoothModule? @relation(fields: [bluetoothModuleId], references: [id])
+
+  ssdId           Int?
+  ssd             SSD?             @relation(fields: [ssdId], references: [id])
+
+  hddId           Int?
+  hdd             HDD?             @relation(fields: [hddId], references: [id])
+
+  coolingSystemId Int?
+  coolingSystem   CoolingSystem?   @relation(fields: [coolingSystemId], references: [id])
+
+  waterCoolingSystemId Int?
+  waterCoolingSystem   WaterCoolingSystem? @relation(fields: [waterCoolingSystemId], references: [id])
+
+  @@map("computer")
+}
+
+enum SocketType {
+  AM4
+  LGA1200
+  LGA1700
+}

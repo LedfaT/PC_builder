@@ -48,7 +48,7 @@ class WifiModuleService {
       client.wifiModule.findMany({
         where,
         skip,
-        take: limit,
+        take: +limit,
         orderBy: { id: "asc" },
       }),
     ]);

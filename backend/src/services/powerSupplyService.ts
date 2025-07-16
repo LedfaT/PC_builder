@@ -48,7 +48,7 @@ class PowerSupplyService {
       client.powerSupply.findMany({
         where,
         skip,
-        take: limit,
+        take: +limit,
         orderBy: { id: "asc" },
       }),
     ]);

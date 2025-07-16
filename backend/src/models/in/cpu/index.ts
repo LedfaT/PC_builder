@@ -1,4 +1,4 @@
-import { CPU } from "@prisma/client";
+import { CPU, SocketType } from "@prisma/client";
 
 export default class CpuCreate {
   title: string;
@@ -10,12 +10,14 @@ export default class CpuCreate {
   clock: string;
   description: string | null;
   image: string | null;
-
+  socket: SocketType;
   constructor(cpu: CPU) {
-    this.cost = cpu.cost;
+    this.cost =
+      typeof cpu.cost === "string" ? parseFloat(cpu.cost) : cpu.cost ?? 0;
     this.cores = cpu.cores;
     this.title = cpu.title;
     this.image = cpu.image;
+    this.socket = cpu.socket;
     this.description = cpu.description;
     this.threads = cpu.threads;
     this.Architecture = cpu.Architecture;
