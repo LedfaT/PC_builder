@@ -131,7 +131,17 @@ export default function GPUPage() {
   return (
     <div>
       <h2>GPU List</h2>
-      <Button onClick={() => toggleModal("add")}>Add new Gpu</Button>
+      <Button
+        style={{
+          backgroundColor: "black",
+          color: "white",
+          marginBottom: "10px",
+        }}
+        variant="contained"
+        onClick={() => toggleModal("add")}
+      >
+        Add new Gpu
+      </Button>
       <DataTable
         headers={headers}
         page={page}

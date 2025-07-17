@@ -126,7 +126,17 @@ export default function FanCoolingPage() {
   return (
     <div>
       <h2>Fan coolings List</h2>
-      <Button onClick={() => toggleModal("add")}>Add new Cpu</Button>
+      <Button
+        style={{
+          backgroundColor: "black",
+          color: "white",
+          marginBottom: "10px",
+        }}
+        variant="contained"
+        onClick={() => toggleModal("add")}
+      >
+        Add new fan cooling system
+      </Button>
       <DataTable
         headers={headers}
         page={page}

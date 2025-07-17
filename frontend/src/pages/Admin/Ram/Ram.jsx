@@ -122,7 +122,17 @@ export default function RAMPage() {
   return (
     <div>
       <h2>RAM List</h2>
-      <Button onClick={() => toggleModal("add")}>Add new Cpu</Button>
+      <Button
+        style={{
+          backgroundColor: "black",
+          color: "white",
+          marginBottom: "10px",
+        }}
+        variant="contained"
+        onClick={() => toggleModal("add")}
+      >
+        Add new Ram
+      </Button>
       <DataTable
         headers={headers}
         page={page}

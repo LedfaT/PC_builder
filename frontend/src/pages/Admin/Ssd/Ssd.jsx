@@ -125,7 +125,17 @@ export default function SSDPage() {
   return (
     <div>
       <h2>SSD List</h2>
-      <Button onClick={() => toggleModal("add")}>Add new Cpu</Button>
+      <Button
+        style={{
+          backgroundColor: "black",
+          color: "white",
+          marginBottom: "10px",
+        }}
+        variant="contained"
+        onClick={() => toggleModal("add")}
+      >
+        Add new Ssd
+      </Button>
       <DataTable
         headers={headers}
         page={page}

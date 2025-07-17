@@ -123,7 +123,17 @@ export default function HDDPage() {
   return (
     <div>
       <h2>HDD List</h2>
-      <Button onClick={() => toggleModal("add")}>Add new Cpu</Button>
+      <Button
+        style={{
+          backgroundColor: "black",
+          color: "white",
+          marginBottom: "10px",
+        }}
+        variant="contained"
+        onClick={() => toggleModal("add")}
+      >
+        Add new Hdd
+      </Button>
       <DataTable
         headers={headers}
         page={page}

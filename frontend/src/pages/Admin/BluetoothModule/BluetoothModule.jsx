@@ -124,7 +124,15 @@ export default function WifiModulePage() {
   return (
     <div>
       <h2>Bluetooth modules List</h2>
-      <Button onClick={() => toggleModal("add")}>
+      <Button
+        style={{
+          backgroundColor: "black",
+          color: "white",
+          marginBottom: "10px",
+        }}
+        variant="contained"
+        onClick={() => toggleModal("add")}
+      >
         Add new bluetooth module
       </Button>
       <DataTable

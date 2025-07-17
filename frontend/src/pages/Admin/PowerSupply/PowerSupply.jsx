@@ -121,9 +121,17 @@ export default function PowerSupplyPage() {
   };
   return (
     <div>
-      <h2>Bluetooth modules List</h2>
-      <Button onClick={() => toggleModal("add")}>
-        Add new bluetooth module
+      <h2>Power supplies list</h2>
+      <Button
+        style={{
+          backgroundColor: "black",
+          color: "white",
+          marginBottom: "10px",
+        }}
+        variant="contained"
+        onClick={() => toggleModal("add")}
+      >
+        Add new power supply
       </Button>
       <DataTable
         headers={headers}

@@ -117,7 +117,17 @@ export default function WifiModulePage() {
   return (
     <div>
       <h2>Wifi modules List</h2>
-      <Button onClick={() => toggleModal("add")}>Add new Cpu</Button>
+      <Button
+        style={{
+          backgroundColor: "black",
+          color: "white",
+          marginBottom: "10px",
+        }}
+        variant="contained"
+        onClick={() => toggleModal("add")}
+      >
+        Add new wifi module
+      </Button>
       <DataTable
         headers={headers}
         page={page}

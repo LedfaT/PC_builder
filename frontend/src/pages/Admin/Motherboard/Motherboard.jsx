@@ -130,7 +130,17 @@ export default function MotherboardPage() {
   return (
     <div>
       <h2>Motherboard List</h2>
-      <Button onClick={() => toggleModal("add")}>Add new motherboard</Button>
+      <Button
+        style={{
+          backgroundColor: "black",
+          color: "white",
+          marginBottom: "10px",
+        }}
+        variant="contained"
+        onClick={() => toggleModal("add")}
+      >
+        Add new motherboard
+      </Button>
       <DataTable
         headers={headers}
         page={page}
